@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <RootNamespace>dotnet_akkadiagram</RootNamespace>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>Wolfgang Stelzhammer</Authors>
+        <Company>Stelzi79</Company>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <RepositoryUrl>https://github.com/Stelzi79/Akka-Diagrams</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>akka.net</PackageTags>
+        <PackAsTool>true</PackAsTool>
+        <PackageProjectUrl>https://github.com/Stelzi79/Akka-Diagrams</PackageProjectUrl>
+        <MinVerVerbosity>normal</MinVerVerbosity>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="C:\Users\proficoncept\source\repos\SourceControlProviders\github.com\Stelzi79\Akka-Diagrams\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MinVer" Version="1.1.0-beta.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+    <Target Name="nuget-add-to-local-source" AfterTargets="Pack">
+
+        <Message Importance="high" Text="Packed package: '$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg'" />
+        <!--<Copy
+          SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg"
+          DestinationFolder="\\myshare\packageshare\"/>-->
+    </Target>
+
+</Project>
