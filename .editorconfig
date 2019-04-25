@@ -1,0 +1,135 @@
+﻿# Rules in this file were initially inferred by Visual Studio IntelliCode from the C:\Users\proficoncept\source\repos\SourceControlProviders\github.com\Stelzi79\AkkaCluster codebase based on best match to current usage at 17.04.2019
+# You can modify the rules from these initially generated values to suit your own policies
+# You can learn more about editorconfig here: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
+# All files
+[*]
+indent_style         = space
+indent_size          = 4
+insert_final_newline = false
+charset              = utf-8-bom
+
+# Code files
+[*.{cs,csx,vb,vbx}]
+
+
+
+#Core editorconfig formatting - indentation
+
+#Formatting - organize using options
+
+#sort System.* using directives alphabetically, and place them before other usings
+dotnet_sort_system_directives_first                                           = true
+
+#Formatting - spacing options
+
+#remove space between method call name and opening parenthesis
+csharp_space_between_method_call_name_and_opening_parenthesis                 = false
+#do not place space characters after the opening parenthesis and before the closing parenthesis of a method call
+csharp_space_between_method_call_parameter_list_parentheses                   = false
+
+#Style - expression bodied member options
+
+#prefer block bodies for constructors
+csharp_style_expression_bodied_constructors                                   = false : suggestion
+#prefer expression-bodied members for methods
+csharp_style_expression_bodied_methods                                        = true : warning
+#prefer expression-bodied members for properties
+csharp_style_expression_bodied_properties                                     = true : warning
+
+#Style - expression level options
+
+#prefer the language keyword for member access expressions, instead of the type name, for types that have a keyword to represent them
+dotnet_style_predefined_type_for_member_access                                = true : suggestion
+
+#Style - language keyword and framework type options
+
+#prefer the language keyword for local variables, method parameters, and class members, instead of the type name, for types that have a keyword to represent them
+dotnet_style_predefined_type_for_locals_parameters_members                    = true : suggestion
+
+#Style - qualification options
+
+#prefer properties not to be prefaced with this. or Me. in Visual Basic
+dotnet_style_qualification_for_property                                       = false : suggestion
+
+
+# Non-private static fields are PascalCase
+dotnet_naming_rule.non_private_static_fields_should_be_pascal_case.severity   = warning
+dotnet_naming_rule.non_private_static_fields_should_be_pascal_case.symbols    = non_private_static_fields
+dotnet_naming_rule.non_private_static_fields_should_be_pascal_case.style      = non_private_static_field_style
+
+dotnet_naming_symbols.non_private_static_fields.applicable_kinds              = field
+dotnet_naming_symbols.non_private_static_fields.applicable_accessibilities    = protected_internal, public, protected, internal
+dotnet_naming_symbols.non_private_static_fields.required_modifiers            = static
+
+dotnet_naming_style.non_private_static_field_style.capitalization             = pascal_case
+
+# Non-private readonly fields are PascalCase
+dotnet_naming_rule.non_private_readonly_fields_should_be_pascal_case.severity = warning
+dotnet_naming_rule.non_private_readonly_fields_should_be_pascal_case.symbols  = non_private_readonly_fields
+dotnet_naming_rule.non_private_readonly_fields_should_be_pascal_case.style    = non_private_readonly_field_style
+
+dotnet_naming_symbols.non_private_readonly_fields.applicable_kinds            = field
+dotnet_naming_symbols.non_private_readonly_fields.applicable_accessibilities  = public, protected, internal, protected_internal,
+dotnet_naming_symbols.non_private_readonly_fields.required_modifiers          = readonly
+
+dotnet_naming_style.non_private_readonly_field_style.capitalization           = pascal_case
+
+# Constants are ALL_UPPER
+dotnet_naming_rule.constants_should_be_pascal_case.severity                   = warning
+dotnet_naming_rule.constants_should_be_pascal_case.symbols                    = constants
+dotnet_naming_rule.constants_should_be_pascal_case.style                      = constant_style
+
+dotnet_naming_symbols.constants.applicable_kinds                              = field, local
+dotnet_naming_symbols.constants.required_modifiers                            = const
+
+dotnet_naming_style.constant_style.capitalization                             = all_upper
+
+
+# Instance fields are camelCase and start with _
+dotnet_naming_rule.instance_fields_should_be_camel_case.severity              = warning
+dotnet_naming_rule.instance_fields_should_be_camel_case.symbols               = instance_fields
+dotnet_naming_rule.instance_fields_should_be_camel_case.style                 = instance_field_style
+
+dotnet_naming_symbols.instance_fields.applicable_kinds                        = field
+
+dotnet_naming_style.instance_field_style.capitalization                       = pascal_case
+dotnet_naming_style.instance_field_style.required_prefix                      = _
+
+# Interfaces start with an I
+dotnet_naming_rule.interfaces_should_be_camel_case.severity                   = warning
+dotnet_naming_rule.interfaces_should_be_camel_case.symbols                    = interfaces
+dotnet_naming_rule.interfaces_should_be_camel_case.style                      = interfaces_style
+
+dotnet_naming_symbols.interfaces.applicable_kinds                             = interface
+
+dotnet_naming_style.interfaces_style.capitalization                           = pascal_case
+dotnet_naming_style.interfaces_style.required_prefix                          = I
+
+
+# Locals and parameters are camelCase
+dotnet_naming_rule.locals_should_be_camel_case.severity                       = warning
+dotnet_naming_rule.locals_should_be_camel_case.symbols                        = locals_and_parameters
+dotnet_naming_rule.locals_should_be_camel_case.style                          = camel_case_style
+
+dotnet_naming_symbols.locals_and_parameters.applicable_kinds                  = parameter, local
+
+dotnet_naming_style.camel_case_style.capitalization                           = camel_case
+
+# Local functions are PascalCase
+dotnet_naming_rule.local_functions_should_be_pascal_case.severity             = warning
+dotnet_naming_rule.local_functions_should_be_pascal_case.symbols              = local_functions
+dotnet_naming_rule.local_functions_should_be_pascal_case.style                = local_function_style
+
+dotnet_naming_symbols.local_functions.applicable_kinds                        = local_function
+
+dotnet_naming_style.local_function_style.capitalization                       = pascal_case
+
+# By default, name items with PascalCase
+dotnet_naming_rule.members_should_be_pascal_case.severity                     = warning
+dotnet_naming_rule.members_should_be_pascal_case.symbols                      = all_members
+dotnet_naming_rule.members_should_be_pascal_case.style                        = pascal_case_style
+
+dotnet_naming_symbols.all_members.applicable_kinds                            = *
+
+dotnet_naming_style.pascal_case_style.capitalization                          = pascal_case
+
