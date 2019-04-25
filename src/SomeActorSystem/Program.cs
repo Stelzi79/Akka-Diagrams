@@ -1,12 +1,10 @@
 ﻿using System;
-using System.IO;
 using Akka.Actor;
-using Akka.Configuration;
 using SomeActorSystem.Actors;
 
 namespace SomeActorSystem
 {
-    class Program
+    internal class Program
     {
         /// <summary>
         /// Creates a Actor system like:
@@ -21,7 +19,7 @@ namespace SomeActorSystem
         ///             akka://SomeActorCluster/user/SomeUserActor/NestedSubActor/SubActorNested3
         /// </summary>
         /// <param name="args"></param>
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Create Akka System ...");
             //string seedNodeConfig = File.ReadAllText("akkanode.conf");

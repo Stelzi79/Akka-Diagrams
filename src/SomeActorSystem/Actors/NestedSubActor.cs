@@ -12,7 +12,6 @@ namespace SomeActorSystem.Actors
             Context.ActorOf<SubActor>(nameof(SubActor) + "Nested1");
             Context.ActorOf<SubActor>(nameof(SubActor) + "Nested2");
             Context.ActorOf<SubActor>(nameof(SubActor) + "Nested3");
-
         }
     }
 }

@@ -4,6 +4,10 @@ A Nuget Library to a dotnet global tool to generate diagrams from a [Akka.Net](h
 
 Inspired by the issue https://github.com/csharpfritz/Quiltoni.PixelBot/issues/24
 
+## Status
+
+[![CodeFactor](https://www.codefactor.io/repository/github/stelzi79/akka-diagrams/badge/develop)](https://www.codefactor.io/repository/github/stelzi79/akka-diagrams/overview/develop)
+
 ## Abilities
 
 * Global dotnet tool which lets you generate a diagram in CLI with ````dotnet akka-diagram Assembly.dll````
