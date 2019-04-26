@@ -3,8 +3,8 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.0</TargetFramework>
-        <RootNamespace>dotnet_akkadiagram</RootNamespace>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <RootNamespace>AkkaDiagram</RootNamespace>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <Authors>Wolfgang Stelzhammer</Authors>
         <Company>Stelzi79</Company>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -14,6 +14,12 @@
         <PackAsTool>true</PackAsTool>
         <PackageProjectUrl>https://github.com/Stelzi79/Akka-Diagrams</PackageProjectUrl>
         <MinVerVerbosity>normal</MinVerVerbosity>
+        <LocalPackageSource>$(SolutionDir)..\.nupkg</LocalPackageSource>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+        <!--Enables the Target Pack only on Debug|AnyCPU-->
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,12 +35,17 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
-    <Target Name="nuget-add-to-local-source" AfterTargets="Pack">
 
-        <Message Importance="high" Text="Packed package: '$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg'" />
-        <!--<Copy
-          SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg"
-          DestinationFolder="\\myshare\packageshare\"/>-->
+    <!--This Target runs after Pack, deletes an existing package in the local $(LocalPackageSource) and adds this new $(PackedNupkg) to it. -->
+    <Target Name="nuget-add-to-local-source" AfterTargets="Pack" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <PropertyGroup>
+            <PackedNupkg>$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg</PackedNupkg>
+            <InstalledPackagePath>$(LocalPackageSource)\$(PackageId)\$(PackageVersion)</InstalledPackagePath>
+        </PropertyGroup>
+        <Message Importance="high" Text="Check if '$(InstalledPackagePath)' exists and deletes it ..." />
+        <RemoveDir Condition="Exists('$(InstalledPackagePath)')" Directories="$(InstalledPackagePath)" />
+        <Message Importance="high" Text="Adding Package '$(PackedNupkg)' into the local Package source '$(LocalPackageSource)' ..." />
+        <Exec Command="nuget add &quot;$(PackedNupkg)&quot; -Source &quot;$(LocalPackageSource)&quot; -NonInteractive -Verbosity detailed" />
     </Target>
 
 </Project>

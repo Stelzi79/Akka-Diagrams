@@ -27,7 +27,7 @@ namespace SomeActorSystem
 
             ActorSystem system = ActorSystem.Create("SomeActorCluster");
 
-            IActorRef localecho = system.ActorOf<SomeUserActor>(nameof(SomeUserActor));
+            system.ActorOf<SomeUserActor>(nameof(SomeUserActor));
             //localecho.Tell("Actor system started and EchoActor added!");
             Console.ReadLine();
         }

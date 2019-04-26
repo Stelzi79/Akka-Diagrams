@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace dotnet_akkadiagram
+namespace AkkaDiagram
 {
     class Program
     {
