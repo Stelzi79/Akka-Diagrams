@@ -36,6 +36,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectCapability Include="DynamicDependentFile" />
+        <ProjectCapability Include="DynamicFileNesting" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="MinVer" Version="1.1.0-beta.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
