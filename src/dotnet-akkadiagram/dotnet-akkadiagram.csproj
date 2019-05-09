@@ -3,6 +3,8 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.0</TargetFramework>
+        <!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
+        <!--<Runnable>true</Runnable>-->
         <RootNamespace>AkkaDiagram</RootNamespace>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <Authors>Wolfgang Stelzhammer</Authors>
@@ -11,19 +13,23 @@
         <RepositoryUrl>https://github.com/Stelzi79/Akka-Diagrams</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>akka.net</PackageTags>
-        <PackAsTool>true</PackAsTool>
         <PackageProjectUrl>https://github.com/Stelzi79/Akka-Diagrams</PackageProjectUrl>
         <MinVerVerbosity>normal</MinVerVerbosity>
         <LocalPackageSource>$(SolutionDir)..\.nupkg</LocalPackageSource>
+        <LangVersion>preview</LangVersion>
+        <Configurations>Debug;Release;Debug Create Tool</Configurations>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <PropertyGroup Condition="'$(Configuration)'=='Debug Create Tool'">
+
         <!--Enables the Target Pack only on Debug|AnyCPU-->
+
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackAsTool>true</PackAsTool>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="C:\Users\proficoncept\source\repos\SourceControlProviders\github.com\Stelzi79\Akka-Diagrams\LICENSE">
+        <None Include="..\..\LICENSE">
             <Pack>True</Pack>
             <PackagePath></PackagePath>
         </None>
@@ -36,8 +42,10 @@
         </PackageReference>
     </ItemGroup>
 
-    <!--This Target runs after Pack, deletes an existing package in the local $(LocalPackageSource) and adds this new $(PackedNupkg) to it. -->
-    <Target Name="nuget-add-to-local-source" AfterTargets="Pack" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+
+    <!--This Target runs after Pack, deletes an existing package in the local $(LocalPackageSource) and adds this new $(PackedNupkg) to it.-->
+
+    <Target Name="nuget-add-to-local-source" AfterTargets="Pack" Condition="'$(Configuration)'=='Debug Create Tool'">
         <PropertyGroup>
             <PackedNupkg>$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg</PackedNupkg>
             <InstalledPackagePath>$(LocalPackageSource)\$(PackageId)\$(PackageVersion)</InstalledPackagePath>
