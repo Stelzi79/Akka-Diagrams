@@ -9,9 +9,9 @@ namespace SomeActorSystem.Actors
     {
         public NestedSubActor()
         {
-            Context.ActorOf<SubActor>(nameof(SubActor) + "Nested1");
-            Context.ActorOf<SubActor>(nameof(SubActor) + "Nested2");
-            Context.ActorOf<SubActor>(nameof(SubActor) + "Nested3");
+            _ = Context.ActorOf<SubActor>(nameof(SubActor) + "Nested1");
+            _ = Context.ActorOf<SubActor>(nameof(SubActor) + "Nested2");
+            _ = Context.ActorOf<SubActor>(nameof(SubActor) + "Nested3");
         }
     }
 }

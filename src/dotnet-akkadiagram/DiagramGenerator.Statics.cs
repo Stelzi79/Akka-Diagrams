@@ -8,7 +8,7 @@ namespace AkkaDiagram
 {
     partial class DiagramGenerator
     {
-        private static readonly List<DiagramGenerator> Generators = new List<DiagramGenerator>(); internal static List<string> ResolveSlns(string[] args)
+        private static readonly List<DiagramGenerator> _Generators = new List<DiagramGenerator>(); internal static List<string> ResolveSlns(string[] args)
         {
             List<string> slns = new List<string>();
             if (args.Count() <= 0)
@@ -34,7 +34,7 @@ namespace AkkaDiagram
 
             foreach (string sln in slns)
             {
-                Generators.Add(new DiagramGenerator(sln));
+                _Generators.Add(new DiagramGenerator(sln));
             }
 
             return slns;
@@ -49,11 +49,7 @@ namespace AkkaDiagram
                 return null;
             }
             string[] slns = Directory.GetFiles(curdir).Where(file => file.EndsWith(".sln")).ToArray();
-            if (slns.Count() <= 0)
-            {
-                return FindSlns(Directory.GetParent(curdir).FullName);
-            }
-            return slns;
+            return slns.Count() <= 0 ? FindSlns(Directory.GetParent(curdir).FullName) : slns;
         }
     }
 }

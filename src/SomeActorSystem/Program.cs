@@ -19,7 +19,7 @@ namespace SomeActorSystem
         ///             akka://SomeActorCluster/user/SomeUserActor/NestedSubActor/SubActorNested3
         /// </summary>
         /// <param name="args"></param>
-        private static void Main(string[] args)
+        private static void Main()
         {
             Console.WriteLine("Create Akka System ...");
             //string seedNodeConfig = File.ReadAllText("akkanode.conf");
@@ -27,9 +27,9 @@ namespace SomeActorSystem
 
             ActorSystem system = ActorSystem.Create("SomeActorCluster");
 
-            system.ActorOf<SomeUserActor>(nameof(SomeUserActor));
+            _ = system.ActorOf<SomeUserActor>(nameof(SomeUserActor));
             //localecho.Tell("Actor system started and EchoActor added!");
-            Console.ReadLine();
+            _ = Console.ReadLine();
         }
     }
 }
