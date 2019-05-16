@@ -11,13 +11,10 @@ namespace AkkaDiagram
     {
         private readonly string _SolutionPath;
 
-
         private DiagramGenerator(string solutionPath) => _SolutionPath = solutionPath;
-        public async Task Gen()
+        public async Task GenerateAsync()
         {
             await Task.Run(() => Task.Yield());
         }
-
-
     }
 }

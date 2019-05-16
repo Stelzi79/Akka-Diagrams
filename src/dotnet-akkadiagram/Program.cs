@@ -18,9 +18,6 @@ namespace AkkaDiagram
             Console.WriteLine($"Generate AkkaDiagramms for these Solutions:\n * {string.Join("\n * ", slns)}");
             DiagramGenerator.Generate();
             _ = Console.ReadKey();
-
         }
-
-
     }
 }
