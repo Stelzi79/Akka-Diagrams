@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Akka.Actor;
 using SomeActorSystem.Actors;
 
@@ -26,7 +26,7 @@ namespace SomeActorSystem
             //Config config = ConfigurationFactory.ParseString(seedNodeConfig);
 
             ActorSystem system = ActorSystem.Create("SomeActorCluster");
-
+          
             _ = system.ActorOf<SomeUserActor>(nameof(SomeUserActor));
             //localecho.Tell("Actor system started and EchoActor added!");
             _ = Console.ReadLine();
