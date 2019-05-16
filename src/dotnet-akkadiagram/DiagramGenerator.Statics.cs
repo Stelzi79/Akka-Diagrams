@@ -40,7 +40,13 @@ namespace AkkaDiagram
             return slns;
         }
 
-        internal static void Generate() => throw new NotImplementedException();
+        internal static async void GenerateDiagramsAsync()
+        {
+            foreach (DiagramGenerator generator in _Generators)
+            {
+                await generator.GenerateDiagramAsync();
+            }
+        }
 
         internal static string[] FindSlns(string curdir)
         {

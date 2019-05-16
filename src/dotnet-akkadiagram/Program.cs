@@ -15,8 +15,8 @@ namespace AkkaDiagram
         static void Main(string[] args)
         {
             List<string> slns = DiagramGenerator.ResolveSlns(args);
-            Console.WriteLine($"Generate AkkaDiagramms for these Solutions:\n * {string.Join("\n * ", slns)}");
-            DiagramGenerator.Generate();
+            Console.WriteLine($"Generate AkkaDiagramms for these Solutions:\n # {string.Join("\n # ", slns)}");
+            DiagramGenerator.GenerateDiagramsAsync();
             _ = Console.ReadKey();
         }
     }
