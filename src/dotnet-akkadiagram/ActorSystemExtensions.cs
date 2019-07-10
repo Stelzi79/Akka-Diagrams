@@ -10,9 +10,9 @@ namespace AkkaDiagram
     {
         private const string DEFAULT_CONFIG = @"akka {                
         # Options: OFF, ERROR, WARNING, INFO, DEBUG
-        stdout-loglevel = WARNING
+        stdout-loglevel = OFF
         loglevel = DEBUG
-        log-config-on-start = on
+        log-config-on-start = off
         loggers = [<logger>]
         actor {
           debug {

@@ -17,6 +17,7 @@
         <MinVerVerbosity>normal</MinVerVerbosity>
         <LocalPackageSource>$(SolutionDir)..\.nupkg</LocalPackageSource>
         <LangVersion>preview</LangVersion>
+        <Nullable>enable</Nullable>
         <Configurations>Debug;Release;Debug Create Tool</Configurations>
     </PropertyGroup>
 
