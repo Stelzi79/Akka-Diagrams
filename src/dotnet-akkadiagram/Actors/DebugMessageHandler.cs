@@ -51,6 +51,9 @@ namespace AkkaDiagram.Actors
         private IEnumerable<Func<Debug, IHandleMessage?>> GetActions()
         {
             yield return msg => SubscibeToChannel.TryCreateMessage(msg);
+            yield return msg => LoggerStarted.TryCreateMessage(msg);
+            yield return msg => Removed.TryCreateMessage(msg);
+            yield return msg => NowSupervising.TryCreateMessage(msg);
 
         }
     }

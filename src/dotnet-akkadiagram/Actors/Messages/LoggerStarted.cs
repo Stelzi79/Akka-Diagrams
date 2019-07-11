@@ -10,12 +10,15 @@ namespace AkkaDiagram.Actors.Messages
 {
     internal class LoggerStarted : HandleMessageBase<LoggerStarted>, IHandleMessage
     {
-        private static readonly Regex _Regex = new Regex(@"", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+        private static readonly Regex _Regex = new Regex(@"Logger (?'logActor'log[0-9]*-(?'actorType'([a-zA-Z0-9.]*))) \[\k<actorType>\] started", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+        private readonly string _LogActor;
+        private readonly string _ActorType;
 
-
-        private LoggerStarted(Debug origin)
+        private LoggerStarted(Debug origin, string logActor, string actorType)
         {
             _Origin = origin;
+            _LogActor = logActor;
+            _ActorType = actorType;
         }
 
         public string Tag => nameof(LoggerStarted);
@@ -24,7 +27,7 @@ namespace AkkaDiagram.Actors.Messages
         {
             var handled = true;
 
-            //WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - {_IActorRef} => {_Cannel}", ConsoleColor.Green, ConsoleColor.Black);
+            WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - {_LogActor} started [{_ActorType}]", ConsoleColor.Green, ConsoleColor.Black);
 
             return handled;
         }
@@ -32,7 +35,7 @@ namespace AkkaDiagram.Actors.Messages
 
         public static LoggerStarted? TryCreateMessage(Debug debugMsg)
             => TryCreateMessage((group)
-                => new LoggerStarted(debugMsg),
+                => new LoggerStarted(debugMsg, group["logActor"].Value, group["actorType"].Value),
                 debugMsg.Message.ToString(),
                 _Regex);
     }
