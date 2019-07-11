@@ -23,14 +23,14 @@ namespace AkkaDiagram.Actors
         {
             var handle = GetMessage(debugMsg);
 
-            Console.WriteLine("[2][DebugHandler] " + debugMsg);
+            //Console.WriteLine("[2][DebugHandler] " + debugMsg);
             if (!(handle != null && handle.Handle()))
             {
-                WriteOutputToConsole($"{nameof(Debug)}: '{debugMsg}'", ConsoleColor.Yellow, ConsoleColor.DarkBlue);
+                WriteOutputToConsole($"[NOTAG]{nameof(Debug)}: '{debugMsg}'", ConsoleColor.Yellow, ConsoleColor.DarkBlue);
             }
             else
             {
-                Console.WriteLine("[!Handled]");
+                //Console.WriteLine("[!Handled]");
             }
         }
 

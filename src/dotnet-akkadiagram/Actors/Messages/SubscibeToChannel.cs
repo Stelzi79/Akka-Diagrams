@@ -19,6 +19,8 @@ namespace AkkaDiagram.Actors.Messages
             _Cannel = cannel;
         }
 
+        public string Tag => "subscribe";
+
         public static SubscibeToChannel? TryCreateMessage(Debug debugMsg)
         {
             var match = _Regex.Match(debugMsg.Message.ToString());
@@ -34,8 +36,8 @@ namespace AkkaDiagram.Actors.Messages
         public bool Handle()
         {
             var hadled = true;
-            //Console.WriteLine(_Origin.Message);
-            WriteOutputToConsole($"[subscribe][{_Origin.Timestamp}] - {_IActorRef} => {_Cannel}", ConsoleColor.Green, ConsoleColor.Black);
+
+            WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - {_IActorRef} => {_Cannel}", ConsoleColor.Green, ConsoleColor.Black);
             return hadled;
         }
     }
