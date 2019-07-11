@@ -5,10 +5,9 @@ using static AkkaDiagram.DiagramLoggerActor;
 
 namespace AkkaDiagram.Actors.Messages
 {
-    internal class SubscibeToChannel : IHandleMessage
+    internal class SubscibeToChannel : HandleMessageBase<SubscibeToChannel>, IHandleMessage
     {
         private static readonly Regex _Regex = new Regex(@"subscribing \[(?'IActorRefInstance'.*)\] to channel (?'cannel'([a-zA-Z0-9.]*))$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-        private readonly Debug _Origin;
         private readonly string _IActorRef;
         private readonly string _Cannel;
 
@@ -19,26 +18,20 @@ namespace AkkaDiagram.Actors.Messages
             _Cannel = cannel;
         }
 
-        public string Tag => "subscribe";
+        public string Tag => nameof(SubscibeToChannel);
 
         public static SubscibeToChannel? TryCreateMessage(Debug debugMsg)
-        {
-            var match = _Regex.Match(debugMsg.Message.ToString());
-            if (match.Success)
-            {
-                var groups = match.Groups;
-                return new SubscibeToChannel(debugMsg, groups["IActorRefInstance"].Value, groups["cannel"].Value);
-            }
-            return null;
-
-        }
+            => TryCreateMessage((group)
+                => new SubscibeToChannel(debugMsg, group["IActorRefInstance"].Value, group["cannel"].Value),
+                debugMsg.Message.ToString(),
+                _Regex);
 
         public bool Handle()
         {
-            var hadled = true;
+            var handled = true;
 
             WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - {_IActorRef} => {_Cannel}", ConsoleColor.Green, ConsoleColor.Black);
-            return hadled;
+            return handled;
         }
     }
 

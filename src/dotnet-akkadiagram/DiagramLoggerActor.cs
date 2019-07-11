@@ -26,15 +26,10 @@ namespace AkkaDiagram
                     unhandled = string.Empty;
                     break;
                 case Debug debugMsg:
-                    //Console.WriteLine("[2][Debug] " + unhandled);
-                    // Only process Debug messages that is not about us
-                    //if (debugMsg.Message is String strMsg/* && !IsMessageForSelf(strMsg)*/)
-                    //{
+
                     _DebugHandler.Forward(debugMsg);
                     unhandled = string.Empty;
-                    //}
-                    //else
-                    //    Console.WriteLine("[2] " + debugMsg);
+
                     break;
                 case Error errorMsg:
                 //break;
