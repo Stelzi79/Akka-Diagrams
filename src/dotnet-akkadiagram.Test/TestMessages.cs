@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Akka.Event;
 
-namespace dotnet_akkadiagram.Test
+namespace AkkaDiagram.Test
 {
     internal static class TestMessages
     {
