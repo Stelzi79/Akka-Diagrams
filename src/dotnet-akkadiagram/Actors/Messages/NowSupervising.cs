@@ -16,8 +16,8 @@ namespace AkkaDiagram.Actors.Messages
 
         private NowSupervising(Debug origin, string actorSupervised)
         {
-            if (string.IsNullOrWhiteSpace(actorSupervised))
-                throw new ArgumentException("is not allowed to be empty! Possible problem with Regex?", nameof(actorSupervised));
+            //if (string.IsNullOrWhiteSpace(actorSupervised))
+            //throw new ArgumentException("is not allowed to be empty! Possible problem with Regex?", nameof(actorSupervised));
             _Origin = origin;
             _ActorSupervised = actorSupervised;
             _ActorSuperviser = _Origin.LogSource;
