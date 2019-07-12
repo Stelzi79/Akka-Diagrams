@@ -10,7 +10,7 @@ using static AkkaDiagram.DiagramLoggerActor;
 namespace AkkaDiagram.Actors
 {
 
-    internal class DebugMessageHandler : ReceiveActor
+    public class DebugMessageHandler : ReceiveActor
     {
 
         public DebugMessageHandler()

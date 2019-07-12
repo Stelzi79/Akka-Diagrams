@@ -11,9 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet-akkadiagram.Test", "
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug Create Tool|Any CPU = Debug Create Tool|Any CPU
-		Debug Create Tool|x64 = Debug Create Tool|x64
-		Debug Create Tool|x86 = Debug Create Tool|x86
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
@@ -22,12 +19,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Debug Create Tool|Any CPU.ActiveCfg = Debug Create Tool|Any CPU
-		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Debug Create Tool|Any CPU.Build.0 = Debug Create Tool|Any CPU
-		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Debug Create Tool|x64.ActiveCfg = Debug Create Tool|Any CPU
-		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Debug Create Tool|x64.Build.0 = Debug Create Tool|Any CPU
-		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Debug Create Tool|x86.ActiveCfg = Debug Create Tool|Any CPU
-		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Debug Create Tool|x86.Build.0 = Debug Create Tool|Any CPU
 		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -40,12 +31,6 @@ Global
 		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Release|x64.Build.0 = Release|Any CPU
 		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Release|x86.ActiveCfg = Release|Any CPU
 		{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}.Release|x86.Build.0 = Release|Any CPU
-		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Debug Create Tool|Any CPU.ActiveCfg = Debug Create Tool|Any CPU
-		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Debug Create Tool|Any CPU.Build.0 = Debug Create Tool|Any CPU
-		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Debug Create Tool|x64.ActiveCfg = Debug Create Tool|Any CPU
-		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Debug Create Tool|x64.Build.0 = Debug Create Tool|Any CPU
-		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Debug Create Tool|x86.ActiveCfg = Debug Create Tool|Any CPU
-		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Debug Create Tool|x86.Build.0 = Debug Create Tool|Any CPU
 		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -58,12 +43,6 @@ Global
 		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Release|x64.Build.0 = Release|Any CPU
 		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Release|x86.ActiveCfg = Release|Any CPU
 		{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}.Release|x86.Build.0 = Release|Any CPU
-		{0321E127-6EDD-4035-A0EE-68F5F9ED4572}.Debug Create Tool|Any CPU.ActiveCfg = Debug|Any CPU
-		{0321E127-6EDD-4035-A0EE-68F5F9ED4572}.Debug Create Tool|Any CPU.Build.0 = Debug|Any CPU
-		{0321E127-6EDD-4035-A0EE-68F5F9ED4572}.Debug Create Tool|x64.ActiveCfg = Debug|Any CPU
-		{0321E127-6EDD-4035-A0EE-68F5F9ED4572}.Debug Create Tool|x64.Build.0 = Debug|Any CPU
-		{0321E127-6EDD-4035-A0EE-68F5F9ED4572}.Debug Create Tool|x86.ActiveCfg = Debug|Any CPU
-		{0321E127-6EDD-4035-A0EE-68F5F9ED4572}.Debug Create Tool|x86.Build.0 = Debug|Any CPU
 		{0321E127-6EDD-4035-A0EE-68F5F9ED4572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0321E127-6EDD-4035-A0EE-68F5F9ED4572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0321E127-6EDD-4035-A0EE-68F5F9ED4572}.Debug|x64.ActiveCfg = Debug|Any CPU
