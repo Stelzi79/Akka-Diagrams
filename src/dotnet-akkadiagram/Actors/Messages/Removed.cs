@@ -13,9 +13,8 @@ namespace AkkaDiagram.Actors.Messages
         private static readonly Regex _Regex = new Regex(@"(?'actorType'([a-zA-Z0-9.]*)) being removed", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         private readonly string _ActorType;
 
-        private Removed(Debug origin, string actorType)
+        private Removed(Debug origin, string actorType) : base(origin)
         {
-            _Origin = origin;
             _ActorType = actorType;
         }
 

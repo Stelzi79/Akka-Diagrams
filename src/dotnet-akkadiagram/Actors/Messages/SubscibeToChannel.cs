@@ -11,9 +11,8 @@ namespace AkkaDiagram.Actors.Messages
         private readonly string _IActorRef;
         private readonly string _Cannel;
 
-        public SubscibeToChannel(Debug debugMsg, string actorRef, string cannel)
+        private SubscibeToChannel(Debug origin, string actorRef, string cannel) : base(origin)
         {
-            _Origin = debugMsg;
             _IActorRef = actorRef;
             _Cannel = cannel;
         }

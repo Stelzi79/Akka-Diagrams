@@ -9,8 +9,14 @@ using static AkkaDiagram.DiagramLoggerActor;
 namespace AkkaDiagram.Actors.Messages
 {
     internal abstract class HandleMessageBase<T>
+        where T : IHandleMessage
     {
         private protected Debug _Origin;
+
+        protected HandleMessageBase(Debug origin)
+        {
+            _Origin = origin;
+        }
 
         private protected static T TryCreateMessage(Func<GroupCollection, T> initialzierFunc, string msg, Regex regex)
         {

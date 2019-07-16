@@ -10,15 +10,12 @@ namespace AkkaDiagram.Actors.Messages
 {
     internal class NowSupervising : HandleMessageBase<NowSupervising>, IHandleMessage
     {
-        private static readonly Regex _Regex = new Regex(@"now supervising (?'actorSupervised'([a-zA-Z0-9/-:]*))$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+        private static readonly Regex _Regex = new Regex(@"^now supervising (?'actorSupervised'.*)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         private readonly string _ActorSupervised;
         private readonly string _ActorSuperviser;
 
-        private NowSupervising(Debug origin, string actorSupervised)
+        private NowSupervising(Debug origin, string actorSupervised) : base(origin)
         {
-            //if (string.IsNullOrWhiteSpace(actorSupervised))
-            //throw new ArgumentException("is not allowed to be empty! Possible problem with Regex?", nameof(actorSupervised));
-            _Origin = origin;
             _ActorSupervised = actorSupervised;
             _ActorSuperviser = _Origin.LogSource;
         }

@@ -14,9 +14,8 @@ namespace AkkaDiagram.Actors.Messages
         private readonly string _LogActor;
         private readonly string _ActorType;
 
-        private LoggerStarted(Debug origin, string logActor, string actorType)
+        private LoggerStarted(Debug origin, string logActor, string actorType) : base(origin)
         {
-            _Origin = origin;
             _LogActor = logActor;
             _ActorType = actorType;
         }
