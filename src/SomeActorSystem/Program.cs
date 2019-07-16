@@ -1,6 +1,10 @@
 ﻿using System;
+using System.IO;
 using Akka.Actor;
+using Akka.Configuration;
+using AkkaDiagram;
 using SomeActorSystem.Actors;
+
 
 namespace SomeActorSystem
 {
@@ -22,13 +26,21 @@ namespace SomeActorSystem
         private static void Main(string[] args)
         {
             Console.WriteLine("Create Akka System ...");
-            //string seedNodeConfig = File.ReadAllText("akkanode.conf");
-            //Config config = ConfigurationFactory.ParseString(seedNodeConfig);
 
-            ActorSystem system = ActorSystem.Create("SomeActorCluster");
+            string seedNodeConfig = File.ReadAllText("akka-hocon.conf");
 
-            IActorRef localecho = system.ActorOf<SomeUserActor>(nameof(SomeUserActor));
-            //localecho.Tell("Actor system started and EchoActor added!");
+            Config config = ConfigurationFactory.ParseString(seedNodeConfig);
+
+#if DEBUG
+            // This injects the needed debug-logging configuration and adds the diagram actor
+            // Be aware of stuff not working if you change debug and logging in config before you inject AkkaDiagrams!
+            config = config.InjectAkkaDiagrams();
+#endif
+
+            using var system = ActorSystem.Create("SomeActorCluster", config);
+            var someActor = system.ActorOf<SomeUserActor>(nameof(SomeUserActor));
+            someActor.Tell("Actor system started and EchoActor added!");
+
             Console.ReadLine();
         }
     }

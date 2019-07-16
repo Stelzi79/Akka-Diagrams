@@ -2,6 +2,8 @@
 
 A Nuget Library to a dotnet global tool to generate diagrams from a [Akka.Net](https://getakka.net/index.html) Actor system.
 
+If you have the need to visualize certain aspects of your running Akka system, this Nuget package is the solution to your problem.
+
 Inspired by the issue https://github.com/csharpfritz/Quiltoni.PixelBot/issues/24
 
 ## Status
@@ -10,7 +12,9 @@ Inspired by the issue https://github.com/csharpfritz/Quiltoni.PixelBot/issues/24
 
 ## Abilities
 
-* Global dotnet tool which lets you generate a diagram in CLI with ````dotnet akka-diagram Assembly.dll````
-* BuildProps of a Nuget package that lets you integrate this as a build step after a successful build.
-* Searches for Actors in an .Net assembly and put it in an Json file
-* Uses the Json file to generate a diagram.
+* lets you inject a Akka ILogReceive that detects debug messages to generate information about the actor system.
+* for debugging it can write the found messages in console.
+* can be configured to output a JsonFile and dotFile.
+* the output file format can be extended by custom handlers.
+* configuration with in Akka builtin HOCON provider.
+* can gather information to use for xUnit unit tests.
