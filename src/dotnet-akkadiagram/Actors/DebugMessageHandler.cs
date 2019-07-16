@@ -12,6 +12,7 @@ namespace AkkaDiagram.Actors
 
     public class DebugMessageHandler : ReceiveActor
     {
+        private const string UnhandledTemplate = "[UNHANDLED] new Debug(\"{LogSource}\", Type.GetType(\"{LogClass}\"), \"{Message}\")";
 
         public DebugMessageHandler()
         {
@@ -26,11 +27,13 @@ namespace AkkaDiagram.Actors
             //Console.WriteLine("[2][DebugHandler] " + debugMsg);
             if (!(handle != null && handle.Handle()))
             {
+                var outString = UnhandledTemplate.Replace("{LogSource}", debugMsg.LogSource);
+                outString = outString.Replace("{LogClass}", debugMsg.LogClass.AssemblyQualifiedName);
+                outString = outString.Replace("{Message}", debugMsg.Message.ToString());
+
+
+                WriteOutputToConsole(outString, ConsoleColor.Yellow, ConsoleColor.DarkBlue);
                 WriteOutputToConsole($"[NOTAG]{nameof(Debug)}: '{debugMsg}'", ConsoleColor.Yellow, ConsoleColor.DarkBlue);
-            }
-            else
-            {
-                //Console.WriteLine("[!Handled]");
             }
         }
 
@@ -54,6 +57,7 @@ namespace AkkaDiagram.Actors
             yield return msg => LoggerStarted.TryCreateMessage(msg);
             yield return msg => Removed.TryCreateMessage(msg);
             yield return msg => NowSupervising.TryCreateMessage(msg);
+            yield return msg => Started.TryCreateMessage(msg);
 
         }
     }
