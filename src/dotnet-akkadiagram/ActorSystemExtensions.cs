@@ -13,7 +13,7 @@ namespace AkkaDiagram
         stdout-loglevel = OFF
         loglevel = DEBUG
         log-config-on-start = off
-        loggers = [<logger>]
+        # loggers = [<logger>]
         actor {
           debug {
             receive = on # log any received message
@@ -32,11 +32,12 @@ namespace AkkaDiagram
 
             var type = typeof(DiagramLoggerActor);
             //\"Akka.Event.DefaultLogger\",
-            var loggers = $"\"{type.FullName}, {type.Assembly.GetName().Name}\"";
-            diagramConfig = diagramConfig.Replace("<logger>", loggers);
+            var loggers = $"akka.loggers = [\"{type.FullName}, {type.Assembly.GetName().Name}\"]";
+            //diagramConfig = diagramConfig.Replace("<logger>", loggers);
+            config = config.WithFallback(ConfigurationFactory.ParseString(diagramConfig));
+            config = config.WithFallback(ConfigurationFactory.ParseString(loggers));
 
-            return config.WithFallback(ConfigurationFactory.ParseString(diagramConfig));
-
+            return config;
         }
     }
 }

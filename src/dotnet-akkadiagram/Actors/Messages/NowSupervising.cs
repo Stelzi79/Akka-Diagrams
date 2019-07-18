@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Akka.Event;
-using static AkkaDiagram.DiagramLoggerActor;
 
 namespace AkkaDiagram.Actors.Messages
 {

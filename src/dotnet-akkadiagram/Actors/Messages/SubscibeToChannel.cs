@@ -7,7 +7,7 @@ namespace AkkaDiagram.Actors.Messages
 {
     internal class SubscibeToChannel : HandleMessageBase<SubscibeToChannel>, IHandleMessage
     {
-        private static readonly Regex _Regex = new Regex(@"subscribing \[(?'IActorRefInstance'.*)\] to channel (?'cannel'([a-zA-Z0-9.]*))$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+        private static readonly Regex _Regex = new Regex(@"^subscribing \[(?'IActorRefInstance'.*)\] to channel (?'cannel'.*)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         private readonly string _IActorRef;
         private readonly string _Cannel;
 

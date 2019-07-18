@@ -61,6 +61,7 @@ namespace AkkaDiagram.Actors
             yield return msg => UnsubscibeFromAll.TryCreateMessage(msg);
             yield return msg => DefaultLoggersStarted.TryCreateMessage(msg);
             yield return msg => RegisteringUnsubscriber.TryCreateMessage(msg);
+            yield return msg => RecievedHandledMessage.TryCreateMessage(msg);
 
         }
     }
