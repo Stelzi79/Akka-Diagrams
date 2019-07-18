@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Text;
 using Akka.Actor;
 using Akka.Event;
 using AkkaDiagram.Actors.Messages;
 using static AkkaDiagram.DiagramLoggerActor;
+using static AkkaDiagram.SettingsLitterals;
 
 namespace AkkaDiagram.Actors
 {
 
     public class DebugMessageHandler : ReceiveActor
     {
-        private const string UnhandledTemplate = "[UNHANDLED] new Debug(\"{LogSource}\", Type.GetType(\"{LogClass}\"), \"{Message}\")";
+        private const string UNHANDLED_TEMPLATE = "[UNHANDLED] new Debug(\"{LogSource}\", Type.GetType(\"{LogClass}\"), \"{Message}\")";
 
         public DebugMessageHandler()
         {
@@ -27,7 +29,7 @@ namespace AkkaDiagram.Actors
             //Console.WriteLine("[2][DebugHandler] " + debugMsg);
             if (!(handle != null && handle.Handle()))
             {
-                var outString = UnhandledTemplate.Replace("{LogSource}", debugMsg.LogSource);
+                var outString = UNHANDLED_TEMPLATE.Replace("{LogSource}", debugMsg.LogSource);
                 outString = outString.Replace("{LogClass}", debugMsg.LogClass.AssemblyQualifiedName);
                 outString = outString.Replace("{Message}", debugMsg.Message.ToString());
 
@@ -53,16 +55,17 @@ namespace AkkaDiagram.Actors
 
         private IEnumerable<Func<Debug, IHandleMessage?>> GetActions()
         {
-            yield return msg => SubscibeToChannel.TryCreateMessage(msg);
-            yield return msg => LoggerStarted.TryCreateMessage(msg);
-            yield return msg => Removed.TryCreateMessage(msg);
-            yield return msg => NowSupervising.TryCreateMessage(msg);
-            yield return msg => Started.TryCreateMessage(msg);
-            yield return msg => UnsubscibeFromAll.TryCreateMessage(msg);
-            yield return msg => DefaultLoggersStarted.TryCreateMessage(msg);
-            yield return msg => RegisteringUnsubscriber.TryCreateMessage(msg);
-            yield return msg => RecievedHandledMessage.TryCreateMessage(msg);
+            var messageHandlers = Context.System.Settings.Config.GetStringList($"akka.diagram.{MESSAGE_HANDLERS}");
+            var funcs = new List<Func<Debug, IHandleMessage?>>();
 
+            foreach (var handler in messageHandlers)
+            {
+                var t = Type.GetType(handler, true, true).GetMethods();
+
+                var tryCreateMessage = Type.GetType(handler, true, true).GetMethod("TryCreateMessage");
+                funcs.Add(msg => (IHandleMessage?)tryCreateMessage.Invoke(null, new object[] { msg }));
+            }
+            return funcs;
         }
     }
 }

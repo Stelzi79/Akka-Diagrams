@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using Akka.Actor;
+using Akka.Configuration;
 using Akka.Event;
 using Akka.TestKit.Xunit2;
 using AkkaDiagram.Actors;
@@ -17,7 +18,19 @@ namespace AkkaDiagram.Test
     {
         private readonly ITestOutputHelper _Output;
 
-        public DebugMessagesTests(ITestOutputHelper output)
+
+        private const string CONF = @"akka.diagram.message-handlers = 
+                               [AkkaDiagram.Actors.Messages.DefaultLoggersStarted, 
+                                AkkaDiagram.Actors.Messages.LoggerStarted,
+                                AkkaDiagram.Actors.Messages.NowSupervising,
+                                AkkaDiagram.Actors.Messages.RecievedHandledMessage, 
+                                AkkaDiagram.Actors.Messages.RegisteringUnsubscriber, 
+                                AkkaDiagram.Actors.Messages.Removed, 
+                                AkkaDiagram.Actors.Messages.Started, 
+                                AkkaDiagram.Actors.Messages.SubscibeToChannel, 
+                                AkkaDiagram.Actors.Messages.UnsubscibeFromAll]}}";
+
+        public DebugMessagesTests(ITestOutputHelper output) : base(CONF)
         {
             using var standardOut = new StreamWriter(Console.OpenStandardOutput())
             {
