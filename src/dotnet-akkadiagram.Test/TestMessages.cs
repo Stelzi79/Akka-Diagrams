@@ -39,7 +39,7 @@ namespace AkkaDiagram.Test
             yield return new object[] {
                 new Debug("UnhandledLogSource", typeof(Object),
                           "This is an Unhandled Debug Message"),
-                "[UNHANDLED] new Debug(\"UnhandledLogSource\", Type.GetType(\"System.Object, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\"), \"This is an Unhandled Debug Message\")\r\n[NOTAG]Debug: '[DEBUG][{time}][Thread 0004][UnhandledLogSource] This is an Unhandled Debug Message'",
+                "[UNHANDLED] new Debug(\"UnhandledLogSource\", Type.GetType(\"System.Object, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e\"), \"This is an Unhandled Debug Message\")\r\n[NOTAG]Debug: '{msg}'",
                 new TimeSpan(0, 0, 0, 0, 100)};
             yield return new object[] {
                 new Debug("akka://SomeActorCluster/system/UnhandledMessageForwarder", Type.GetType("Akka.Event.LoggingBus+UnhandledMessageForwarder, Akka, Version=1.3.13.0, Culture=neutral, PublicKeyToken=null", true), "Started (Akka.Event.LoggingBus+UnhandledMessageForwarder)"),

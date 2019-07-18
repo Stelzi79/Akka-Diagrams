@@ -49,6 +49,7 @@ namespace AkkaDiagram.Test
             subject.Tell(debugMsg);
             Thread.Sleep(timeout);
             expected = expected.Replace("{time}", debugMsg.Timestamp.ToString());
+            expected = expected.Replace("{msg}", debugMsg.ToString());
             expected += "\r\n";
 
             //assert
