@@ -10,7 +10,7 @@ namespace AkkaDiagram.Actors.Messages
     {
         private static readonly Regex _Regex = new Regex(@"^registering unsubscriber with (?'EventStreamType'.*)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
-        private Type UnsubscriberType => _Origin.LogClass;
+        private Type UnsubscriberType => Origin.LogClass;
 
         private RegisteringUnsubscriber(Debug origin) : base(origin)
         {
@@ -22,14 +22,15 @@ namespace AkkaDiagram.Actors.Messages
         {
             var handled = true;
 
-            WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - with {UnsubscriberType.FullName}", ConsoleColor.Green, ConsoleColor.Black);
+            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - with {UnsubscriberType.FullName}", ConsoleColor.Green, ConsoleColor.Black);
 
             return handled;
         }
-        public static RegisteringUnsubscriber? TryCreateMessage(Debug debugMsg)
+        public static RegisteringUnsubscriber? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new RegisteringUnsubscriber(debugMsg),
                 debugMsg.Message.ToString(),
-                _Regex);
+                _Regex,
+                config);
     }
 }

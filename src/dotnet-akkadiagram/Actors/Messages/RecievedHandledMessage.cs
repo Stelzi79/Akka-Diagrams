@@ -11,7 +11,7 @@ namespace AkkaDiagram.Actors.Messages
         private static readonly Regex _Regex = new Regex(@"^received handled message (?'message'.*) from (?'fromActor'.*)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         private readonly string _Message;
         private readonly string _FromActor;
-        private string ReceivedActor => _Origin.LogSource;
+        private string ReceivedActor => Origin.LogSource;
 
         public string Tag => nameof(RecievedHandledMessage);
 
@@ -25,15 +25,16 @@ namespace AkkaDiagram.Actors.Messages
         {
             var handled = true;
 
-            WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - [{ReceivedActor}] handled message '{_Message}' from [{_FromActor}]", ConsoleColor.Green, ConsoleColor.Black);
+            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - [{ReceivedActor}] handled message '{_Message}' from [{_FromActor}]", ConsoleColor.Green, ConsoleColor.Black);
 
             return handled;
         }
 
-        public static RecievedHandledMessage? TryCreateMessage(Debug debugMsg)
+        public static RecievedHandledMessage? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new RecievedHandledMessage(debugMsg, group["message"].Value, group["fromActor"].Value),
                 debugMsg.Message.ToString(),
-                _Regex);
+                _Regex,
+                config);
     }
 }

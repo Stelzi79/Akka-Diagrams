@@ -26,16 +26,17 @@ namespace AkkaDiagram.Actors.Messages
         {
             var handled = true;
 
-            WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - {_LogActor} started [{_ActorType}]", ConsoleColor.Green, ConsoleColor.Black);
+            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - {_LogActor} started [{_ActorType}]", ConsoleColor.Green, ConsoleColor.Black);
 
             return handled;
         }
 
 
-        public static LoggerStarted? TryCreateMessage(Debug debugMsg)
+        public static LoggerStarted? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new LoggerStarted(debugMsg, group["logActor"].Value, group["actorType"].Value),
                 debugMsg.Message.ToString(),
-                _Regex);
+                _Regex,
+                config);
     }
 }

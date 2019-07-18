@@ -19,16 +19,23 @@ namespace AkkaDiagram.Test
         private readonly ITestOutputHelper _Output;
 
 
-        private const string CONF = @"akka.diagram.message-handlers = 
-                               [AkkaDiagram.Actors.Messages.DefaultLoggersStarted, 
+        private const string CONF = @"akka{
+
+diagram{
+types = [""AkkaDiagram.Actors.Handlers.ConsoleOutputHandler, dotnet-akkadiagram""]
+message-handlers =
+                               [AkkaDiagram.Actors.Messages.DefaultLoggersStarted,
                                 AkkaDiagram.Actors.Messages.LoggerStarted,
                                 AkkaDiagram.Actors.Messages.NowSupervising,
-                                AkkaDiagram.Actors.Messages.RecievedHandledMessage, 
-                                AkkaDiagram.Actors.Messages.RegisteringUnsubscriber, 
-                                AkkaDiagram.Actors.Messages.Removed, 
-                                AkkaDiagram.Actors.Messages.Started, 
-                                AkkaDiagram.Actors.Messages.SubscibeToChannel, 
-                                AkkaDiagram.Actors.Messages.UnsubscibeFromAll]}}";
+                                AkkaDiagram.Actors.Messages.RecievedHandledMessage,
+                                AkkaDiagram.Actors.Messages.RegisteringUnsubscriber,
+                                AkkaDiagram.Actors.Messages.Removed,
+                                AkkaDiagram.Actors.Messages.Started,
+                                AkkaDiagram.Actors.Messages.SubscibeToChannel,
+                                AkkaDiagram.Actors.Messages.UnsubscibeFromAll]
+}
+}
+";
 
         public DebugMessagesTests(ITestOutputHelper output) : base(CONF)
         {

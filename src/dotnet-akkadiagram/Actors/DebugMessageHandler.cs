@@ -63,7 +63,7 @@ namespace AkkaDiagram.Actors
                 var t = Type.GetType(handler, true, true).GetMethods();
 
                 var tryCreateMessage = Type.GetType(handler, true, true).GetMethod("TryCreateMessage");
-                funcs.Add(msg => (IHandleMessage?)tryCreateMessage.Invoke(null, new object[] { msg }));
+                funcs.Add(msg => (IHandleMessage?)tryCreateMessage.Invoke(null, new object[] { msg, Context.System.Settings.Config.GetStringList($"akka.diagram.{DIAGRAM_TYPES}") }));
             }
             return funcs;
         }

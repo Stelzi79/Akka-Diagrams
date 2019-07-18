@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Akka.Event;
 using static AkkaDiagram.DiagramLoggerActor;
@@ -19,17 +20,18 @@ namespace AkkaDiagram.Actors.Messages
 
         public string Tag => nameof(SubscibeToChannel);
 
-        public static SubscibeToChannel? TryCreateMessage(Debug debugMsg)
+        public static SubscibeToChannel? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new SubscibeToChannel(debugMsg, group["IActorRefInstance"].Value, group["cannel"].Value),
                 debugMsg.Message.ToString(),
-                _Regex);
+                _Regex,
+                config);
 
         public bool Handle()
         {
             var handled = true;
 
-            WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - {_IActorRef} => {_Cannel}", ConsoleColor.Green, ConsoleColor.Black);
+            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - {_IActorRef} => {_Cannel}", ConsoleColor.Green, ConsoleColor.Black);
             return handled;
         }
     }

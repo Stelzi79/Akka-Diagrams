@@ -21,14 +21,15 @@ namespace AkkaDiagram.Actors.Messages
         {
             var handled = true;
 
-            WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}]", ConsoleColor.Green, ConsoleColor.Black);
+            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}]", ConsoleColor.Green, ConsoleColor.Black);
 
             return handled;
         }
-        public static DefaultLoggersStarted? TryCreateMessage(Debug debugMsg)
+        public static DefaultLoggersStarted? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new DefaultLoggersStarted(debugMsg),
                 debugMsg.Message.ToString(),
-                _Regex);
+                _Regex,
+                config);
     }
 }

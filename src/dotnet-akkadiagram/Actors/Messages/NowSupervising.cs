@@ -16,7 +16,7 @@ namespace AkkaDiagram.Actors.Messages
         private NowSupervising(Debug origin, string actorSupervised) : base(origin)
         {
             _ActorSupervised = actorSupervised;
-            _ActorSuperviser = _Origin.LogSource;
+            _ActorSuperviser = Origin.LogSource;
         }
 
         public string Tag => nameof(NowSupervising);
@@ -25,16 +25,17 @@ namespace AkkaDiagram.Actors.Messages
         {
             var handled = true;
 
-            WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - {_ActorSuperviser} supervises {_ActorSupervised}", ConsoleColor.Green, ConsoleColor.Black);
+            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - {_ActorSuperviser} supervises {_ActorSupervised}", ConsoleColor.Green, ConsoleColor.Black);
 
             return handled;
         }
 
 
-        public static NowSupervising? TryCreateMessage(Debug debugMsg)
+        public static NowSupervising? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new NowSupervising(debugMsg, group["actorSupervised"].Value),
                 debugMsg.Message.ToString(),
-                _Regex);
+                _Regex,
+                config);
     }
 }

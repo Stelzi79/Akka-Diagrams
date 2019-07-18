@@ -24,16 +24,17 @@ namespace AkkaDiagram.Actors.Messages
         {
             var handled = true;
 
-            WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - {_ActorType}", ConsoleColor.Green, ConsoleColor.Black);
+            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - {_ActorType}", ConsoleColor.Green, ConsoleColor.Black);
 
             return handled;
         }
 
 
-        public static Removed? TryCreateMessage(Debug debugMsg)
+        public static Removed? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new Removed(debugMsg, group["actorType"].Value),
                 debugMsg.Message.ToString(),
-                _Regex);
+                _Regex,
+                config);
     }
 }

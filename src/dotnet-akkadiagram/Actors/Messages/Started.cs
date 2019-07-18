@@ -10,8 +10,8 @@ namespace AkkaDiagram.Actors.Messages
     {
 
         private static readonly Regex _Regex = new Regex(@"Started \((?'actorType'([a-zA-Z0-9.+]*))\)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-        private string StartedActorPath => _Origin.LogSource;
-        private Type ActorType => _Origin.LogClass;
+        private string StartedActorPath => Origin.LogSource;
+        private Type ActorType => Origin.LogClass;
 
         public string Tag => nameof(Started);
 
@@ -19,7 +19,7 @@ namespace AkkaDiagram.Actors.Messages
         {
             var handled = true;
 
-            WriteOutputToConsole($"[{Tag}][{_Origin.Timestamp}] - [{StartedActorPath}]", ConsoleColor.Green, ConsoleColor.Black);
+            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - [{StartedActorPath}]", ConsoleColor.Green, ConsoleColor.Black);
 
             return handled;
         }
@@ -27,10 +27,11 @@ namespace AkkaDiagram.Actors.Messages
         {
 
         }
-        public static Started? TryCreateMessage(Debug debugMsg)
+        public static Started? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new Started(debugMsg),
                 debugMsg.Message.ToString(),
-                _Regex);
+                _Regex,
+                config);
     }
 }
