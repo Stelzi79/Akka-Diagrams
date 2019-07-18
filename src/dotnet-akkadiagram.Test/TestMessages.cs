@@ -66,11 +66,10 @@ namespace AkkaDiagram.Test
                 "[RegisteringUnsubscriber][{time}] - with Akka.Event.EventStreamUnsubscriber",
                 new TimeSpan(0, 0, 0, 0, 100)};
 
-            //yield return new object[] {
-            //    new Debug("", typeof(Akka.Event.EventStream),
-            //              ""),
-            //    "",
-            //    new TimeSpan(0, 0, 0, 0, 100)};
+            yield return new object[] {
+                new Debug("akka://SomeActorCluster/system/log1-DiagramLoggerActor", Type.GetType("AkkaDiagram.DiagramLoggerActor, dotnet-akkadiagram, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"), "received handled message [DEBUG][18.07.2019 16:21:18][Thread 0001][EventStream] subscribing [akka://SomeActorCluster/system/log1-DiagramLoggerActor#1952415063] to channel Akka.Event.Debug from akka://SomeActorCluster/deadLetters"),
+                "[RecievedHandledMessage][{time}] - [akka://SomeActorCluster/system/log1-DiagramLoggerActor] handled message '[DEBUG][18.07.2019 16:21:18][Thread 0001][EventStream] subscribing [akka://SomeActorCluster/system/log1-DiagramLoggerActor#1952415063] to channel Akka.Event.Debug' from [akka://SomeActorCluster/deadLetters]",
+                new TimeSpan(0, 0, 0, 0, 100)};
 
             //yield return new object[] {
             //    new Debug("", typeof(Akka.Event.EventStream),
