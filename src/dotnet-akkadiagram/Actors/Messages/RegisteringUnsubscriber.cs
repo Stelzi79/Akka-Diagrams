@@ -28,12 +28,12 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
-        public static RegisteringUnsubscriber? TryCreateMessage(Debug debugMsg, IList<string> config)
+        public static RegisteringUnsubscriber? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(
                 (group)
                 => new RegisteringUnsubscriber(debugMsg),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
-                config);
+                handlers);
     }
 }

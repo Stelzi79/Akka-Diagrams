@@ -9,19 +9,18 @@ namespace AkkaDiagram.Actors.Messages
     public abstract class HandleMessageBase<T>
         where T : IHandleMessage
     {
-        private static IList<string> _Config;
-        private static List<OutputHandlerInfo> _OutputHandlers;
+        //private static Config _Config;
+        private static IList<OutputHandlerInfo> _OutputHandlers;
 
-        private static void InitOutputHandlers()
-        {
-            _OutputHandlers = new List<OutputHandlerInfo>();
+        //private static void InitOutputHandlers()
+        //{
+        //    _OutputHandlers = new List<OutputHandlerInfo>();
 
-            foreach (var handler in _Config)
-            {
-                _OutputHandlers.Add(new OutputHandlerInfo(handler));
-            }
-        }
-
+        //    foreach (var handler in _Config.GetStringList(OUTPUT_HANDLERS))
+        //    {
+        //        _OutputHandlers.Add(new OutputHandlerInfo(handler));
+        //    }
+        //}
         public Debug Origin { get; private set; }
 
         protected HandleMessageBase(Debug origin)
@@ -39,10 +38,11 @@ namespace AkkaDiagram.Actors.Messages
             return true;
         }
 
-        private protected static T TryCreateMessage(Func<GroupCollection, T> initialzierFunc, string msg, Regex regex, IList<string> config)
+        private protected static T TryCreateMessage(Func<GroupCollection, T> initialzierFunc, string msg, Regex regex, IList<OutputHandlerInfo> outputHandlers)
         {
-            _Config = config;
-            InitOutputHandlers();
+            _OutputHandlers = outputHandlers;
+
+            // InitOutputHandlers();
             var match = regex.Match(msg);
             return match.Success ? initialzierFunc(match.Groups) : default;
         }

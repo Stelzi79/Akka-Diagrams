@@ -28,12 +28,12 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
-        public static Removed? TryCreateMessage(Debug debugMsg, IList<string> config)
+        public static Removed? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(
                 (group)
                 => new Removed(debugMsg, group["actorType"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
-                config);
+                handlers);
     }
 }

@@ -19,7 +19,7 @@ namespace AkkaDiagram
                 throw new ArgumentNullException(nameof(config));
 
             var loggerType = typeof(DiagramLoggerActor);
-            var handlerType = typeof(ConsoleOutputHandler);
+            var handlerType = typeof(Actors.Handlers.Console);
             var loggers = $"akka.loggers = [\"{loggerType.FullName}, {loggerType.Assembly.GetName().Name}\"]";
             var diagramTypes = $"akka.diagram.{OUTPUT_HANDLERS} = [{handlerType.FullName}]";
 

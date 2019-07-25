@@ -32,12 +32,12 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
-        public static ReceivedHandledMessage? TryCreateMessage(Debug debugMsg, IList<string> config)
+        public static ReceivedHandledMessage? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(
                 (group)
                 => new ReceivedHandledMessage(debugMsg, group["message"].Value, group["fromActor"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
-                config);
+                handlers);
     }
 }

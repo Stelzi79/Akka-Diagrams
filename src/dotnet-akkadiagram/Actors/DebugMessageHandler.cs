@@ -38,10 +38,17 @@ namespace AkkaDiagram.Actors
             }
         }
 
+        private IEnumerable<Func<Debug, IHandleMessage?>>? _Funcs;
+
         private IHandleMessage? GetMessage(Debug debugMsg)
         {
             IHandleMessage? msg = null;
-            foreach (var action in GetActions())
+            if (_Funcs == null)
+            {
+                _Funcs = GetActions();
+            }
+
+            foreach (var action in _Funcs)
             {
                 msg = action(debugMsg);
                 if (msg != null)
@@ -52,7 +59,10 @@ namespace AkkaDiagram.Actors
         }
 
         private readonly Dictionary<string, Type> _DefinedTypes = new Dictionary<string, Type>();
+        private readonly Dictionary<string, Config> _OutputHandlerConfig = new Dictionary<string, Config>();
+
         private readonly Config _Config = Context.System.Settings.Config;
+        private readonly IList<OutputHandlerInfo> _OutputHandlers = new List<OutputHandlerInfo>();
         private List<string> _MessageHandlers = new List<string>();
 
         protected override void PreStart()
@@ -67,20 +77,36 @@ namespace AkkaDiagram.Actors
                 var type = Type.GetType(typeString, true)!;
                 _DefinedTypes.Add(type.Name, type);
             }
+
+            foreach (var outputHandler in _Config.GetStringList($"akka.diagram.{OUTPUT_HANDLERS}"))
+            {
+                _OutputHandlers.Add(new OutputHandlerInfo(_DefinedTypes[outputHandler]));
+                _OutputHandlerConfig.Add(outputHandler, _Config.GetConfig($"akka.diagram.{OUTPUT_HANDLER_CONFIGURATIONS}.{outputHandler.ToLower()}"));
+            }
         }
 
         private IEnumerable<Func<Debug, IHandleMessage?>> GetActions()
         {
             var funcs = new List<Func<Debug, IHandleMessage?>>();
-
-            foreach (var handler in _MessageHandlers)
+            foreach (var outputHandler in _OutputHandlers)
             {
-                var handlerType = _DefinedTypes[handler];
-                if (handlerType != null)
+                // reads the OutputHandler specific enabled MessageHandlers.
+                // if there are none specified it takes all the default ones.
+                var handlerConfig = _OutputHandlerConfig[outputHandler.Name]?.GetStringList(MESSAGE_HANDLERS);
+                if (handlerConfig == null || handlerConfig.Count <= 0)
                 {
-                    // var t = handlerType.GetMethods();
-                    var tryCreateMessage = handlerType.GetMethod("TryCreateMessage");
-                    funcs.Add(msg => (IHandleMessage?)tryCreateMessage?.Invoke(null, new object[] { msg, Context.System.Settings.Config.GetStringList($"akka.diagram.{OUTPUT_HANDLERS}") }));
+                    handlerConfig = _MessageHandlers;
+                }
+
+                foreach (var handler in _MessageHandlers)
+                {
+                    var handlerType = _DefinedTypes[handler];
+                    if (handlerType != null && handlerConfig.Contains(handler))
+                    {
+                        // var t = handlerType.GetMethods();
+                        var tryCreateMessage = handlerType.GetMethod("TryCreateMessage");
+                        funcs.Add(msg => (IHandleMessage?)tryCreateMessage?.Invoke(null, new object[] { msg, _OutputHandlers }));
+                    }
                 }
             }
 

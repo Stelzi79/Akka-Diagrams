@@ -21,13 +21,13 @@ namespace AkkaDiagram.Actors.Messages
 
         public string Tag => nameof(SubscribeToChannel);
 
-        public static SubscribeToChannel? TryCreateMessage(Debug debugMsg, IList<string> config)
+        public static SubscribeToChannel? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(
                 (group)
                 => new SubscribeToChannel(debugMsg, group["IActorRefInstance"].Value, group["cannel"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
-                config);
+                handlers);
 
         public bool Handle()
         {

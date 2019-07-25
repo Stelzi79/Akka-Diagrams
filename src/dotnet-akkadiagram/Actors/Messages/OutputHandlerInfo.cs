@@ -5,18 +5,18 @@ using System.Reflection;
 
 namespace AkkaDiagram.Actors.Messages
 {
-    internal class OutputHandlerInfo
+    public class OutputHandlerInfo
     {
         private const string NO_INSTANCE = "Not able to instantiate with default constructor";
         private const string NO_CONSTRUCTOR = "No default constructor present";
         private readonly Dictionary<Type, MethodInfo> _Handlers = new Dictionary<Type, MethodInfo>();
         private readonly object _Instance;
 
-        public OutputHandlerInfo(string typeName)
+        public OutputHandlerInfo(Type type)
         {
             try
             {
-                var type = Type.GetType(typeName, true);
+                Name = type.Name;
                 var constructor = type!.GetConstructor(Type.EmptyTypes)
                     ?? throw new Exception(NO_CONSTRUCTOR);
                 _Instance = constructor.Invoke(new object[] { })
@@ -29,9 +29,16 @@ namespace AkkaDiagram.Actors.Messages
             }
             catch (Exception e)
             {
-                throw new ArgumentException($"{typeName} is no valid OutputHandler", nameof(typeName), e);
+                throw new ArgumentException($"{type.FullName} is no valid OutputHandler", nameof(type), e);
             }
         }
+
+        public OutputHandlerInfo(string typeName)
+            : this(Type.GetType(typeName, true)!)
+        {
+        }
+
+        public string Name { get; }
 
         public void Handle(IHandleMessage param)
             => _Handlers[param.GetType()].Invoke(_Instance, new object[] { param });

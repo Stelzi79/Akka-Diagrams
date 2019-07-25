@@ -30,12 +30,12 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
-        public static LoggerStarted? TryCreateMessage(Debug debugMsg, IList<string> config)
+        public static LoggerStarted? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(
                 (group)
                 => new LoggerStarted(debugMsg, group["logActor"].Value, group["actorType"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
-                config);
+                handlers);
     }
 }

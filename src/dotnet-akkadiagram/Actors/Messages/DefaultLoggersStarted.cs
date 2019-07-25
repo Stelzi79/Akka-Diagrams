@@ -26,12 +26,12 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
-        public static DefaultLoggersStarted? TryCreateMessage(Debug debugMsg, IList<string> config)
+        public static DefaultLoggersStarted? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(
                 (group)
                 => new DefaultLoggersStarted(debugMsg),
                 debugMsg?.Message.ToString() ?? string.Empty,
                 _Regex,
-                config);
+                handlers);
     }
 }

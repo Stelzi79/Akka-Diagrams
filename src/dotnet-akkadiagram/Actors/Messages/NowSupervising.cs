@@ -30,12 +30,12 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
-        public static NowSupervising? TryCreateMessage(Debug debugMsg, IList<string> config)
+        public static NowSupervising? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(
                 (group)
                 => new NowSupervising(debugMsg, group["actorSupervised"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
-                config);
+                handlers);
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AkkaDiagram.Actors.Messages;
+﻿using AkkaDiagram.Actors.Messages;
 
 namespace AkkaDiagram.Actors.Handlers
 {

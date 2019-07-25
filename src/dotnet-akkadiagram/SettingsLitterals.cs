@@ -11,6 +11,5 @@
 
         // public const string DIAGRAM_TYPES = "types";
         // public const string DIAGRAM_TYPES = "types";
-        // public const string DIAGRAM_TYPES = "types";
     }
 }
