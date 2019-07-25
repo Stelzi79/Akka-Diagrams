@@ -6,16 +6,16 @@ using Akka.Event;
 
 namespace AkkaDiagram.Actors.Messages
 {
-    internal class RecievedHandledMessage : HandleMessageBase<RecievedHandledMessage>, IHandleMessage
+    internal class ReceivedHandledMessage : HandleMessageBase<ReceivedHandledMessage>, IHandleMessage
     {
         private static readonly Regex _Regex = new Regex(@"^received handled message (?'message'.*) from (?'fromActor'.*)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         private readonly string _Message;
         private readonly string _FromActor;
         private string ReceivedActor => Origin.LogSource;
 
-        public string Tag => nameof(RecievedHandledMessage);
+        public string Tag => nameof(ReceivedHandledMessage);
 
-        public RecievedHandledMessage(Debug origin, string message, string fromActor) : base(origin)
+        public ReceivedHandledMessage(Debug origin, string message, string fromActor) : base(origin)
         {
             _Message = message;
             _FromActor = fromActor;
@@ -30,9 +30,9 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
-        public static RecievedHandledMessage? TryCreateMessage(Debug debugMsg, IList<string> config)
+        public static ReceivedHandledMessage? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
-                => new RecievedHandledMessage(debugMsg, group["message"].Value, group["fromActor"].Value),
+                => new ReceivedHandledMessage(debugMsg, group["message"].Value, group["fromActor"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
                 config);

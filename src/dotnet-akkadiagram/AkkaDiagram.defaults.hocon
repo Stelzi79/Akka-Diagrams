@@ -1,8 +1,8 @@
 ﻿akka {
     # Options: OFF, ERROR, WARNING, INFO, DEBUG
-    stdout-loglevel = OFF
+    stdout-loglevel = off
     loglevel = DEBUG
-    log-config-on-start = OFF
+    log-config-on-start = off
     # loggers = [<logger>]
     diagram {
         default-types = [
@@ -25,8 +25,9 @@
             Started,
             SubscribeToChannel,
             UnsubscribeFromAll]
-        # These are Type.FullName that change or extend built in behavior
+        # These are Type.FullName that change or extend built in behavior. Every string is supported that is valid for Type.GetType(string).
         custom-types = []
+        # these get added to tthe message-handlers. If you want to overwrite the default message handling then overwrite the message-handlers
         custom-message-handlers = []
     # Types that handle the output in the format '""{Type.FullName}, Assembly.GetName().Name""'. Defaults to 'ConsoleOutputHandler'
     # types = [""AkkaDiagram.Actors.Handlers.ConsoleOutputHandler, dotnet-akkadiagram"",

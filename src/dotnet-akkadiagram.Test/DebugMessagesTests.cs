@@ -49,7 +49,10 @@ message-handlers =
 
         [Theory]
         [ClassData(typeof(TestMessages))]
-        public void ShouldDedectAndWriteDebugMessages(Debug debugMsg, String expected, TimeSpan timeout, bool ignore = false)
+        public void ShouldDedectAndWriteDebugMessages(Debug debugMsg,
+                                                      string expected,
+                                                      TimeSpan timeout,
+                                                      bool ignore = false)
         {
             if (ignore)
             {
