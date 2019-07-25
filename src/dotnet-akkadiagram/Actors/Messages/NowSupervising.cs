@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Buffers.Text;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
+
 using Akka.Event;
 
 namespace AkkaDiagram.Actors.Messages
@@ -13,7 +12,8 @@ namespace AkkaDiagram.Actors.Messages
         private readonly string _ActorSupervised;
         private readonly string _ActorSuperviser;
 
-        private NowSupervising(Debug origin, string actorSupervised) : base(origin)
+        private NowSupervising(Debug origin, string actorSupervised)
+            : base(origin)
         {
             _ActorSupervised = actorSupervised;
             _ActorSuperviser = Origin.LogSource;
@@ -30,9 +30,9 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
-
         public static NowSupervising? TryCreateMessage(Debug debugMsg, IList<string> config)
-            => TryCreateMessage((group)
+            => TryCreateMessage(
+                (group)
                 => new NowSupervising(debugMsg, group["actorSupervised"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,

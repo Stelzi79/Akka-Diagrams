@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AkkaDiagram
+﻿namespace AkkaDiagram
 {
     public class SettingsLitterals
     {
@@ -11,9 +7,10 @@ namespace AkkaDiagram
         public const string DEFAULT_TYPES = "default-types";
         public const string CUSTOM_TYPES = "custom-types";
         public const string CUSTOM_MESSAGE_HANDLERS = "custom-message-handlers";
-        //public const string DIAGRAM_TYPES = "types";
-        //public const string DIAGRAM_TYPES = "types";
-        //public const string DIAGRAM_TYPES = "types";
-        //public const string DIAGRAM_TYPES = "types";
+
+        // public const string DIAGRAM_TYPES = "types";
+        // public const string DIAGRAM_TYPES = "types";
+        // public const string DIAGRAM_TYPES = "types";
+        // public const string DIAGRAM_TYPES = "types";
     }
 }

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
+
 using Akka.Event;
 
 namespace AkkaDiagram.Actors.Messages
 {
     internal class Started : HandleMessageBase<Started>, IHandleMessage
     {
-
         private static readonly Regex _Regex = new Regex(@"Started \((?'actorType'([a-zA-Z0-9.+]*))\)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+
         private string StartedActorPath => Origin.LogSource;
+
         private Type ActorType => Origin.LogClass;
 
         public string Tag => nameof(Started);
@@ -23,12 +24,15 @@ namespace AkkaDiagram.Actors.Messages
 
             return handled;
         }
-        private Started(Debug origin) : base(origin)
-        {
 
+        private Started(Debug origin)
+            : base(origin)
+        {
         }
+
         public static Started? TryCreateMessage(Debug debugMsg, IList<string> config)
-            => TryCreateMessage((group)
+            => TryCreateMessage(
+                (group)
                 => new Started(debugMsg),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,

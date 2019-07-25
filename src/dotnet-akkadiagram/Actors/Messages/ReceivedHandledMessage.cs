@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
+
 using Akka.Event;
 
 namespace AkkaDiagram.Actors.Messages
@@ -11,11 +11,13 @@ namespace AkkaDiagram.Actors.Messages
         private static readonly Regex _Regex = new Regex(@"^received handled message (?'message'.*) from (?'fromActor'.*)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         private readonly string _Message;
         private readonly string _FromActor;
+
         private string ReceivedActor => Origin.LogSource;
 
         public string Tag => nameof(ReceivedHandledMessage);
 
-        public ReceivedHandledMessage(Debug origin, string message, string fromActor) : base(origin)
+        public ReceivedHandledMessage(Debug origin, string message, string fromActor)
+            : base(origin)
         {
             _Message = message;
             _FromActor = fromActor;
@@ -31,7 +33,8 @@ namespace AkkaDiagram.Actors.Messages
         }
 
         public static ReceivedHandledMessage? TryCreateMessage(Debug debugMsg, IList<string> config)
-            => TryCreateMessage((group)
+            => TryCreateMessage(
+                (group)
                 => new ReceivedHandledMessage(debugMsg, group["message"].Value, group["fromActor"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,

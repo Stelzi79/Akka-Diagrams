@@ -2,10 +2,10 @@
 
 namespace AkkaDiagram
 {
-    class Program
+    internal class Program
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter")]
-        static void Main(string[] args)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Will be used in the Future")]
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
             _ = Console.ReadKey();

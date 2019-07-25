@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Buffers.Text;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
+
 using Akka.Event;
-using static AkkaDiagram.DiagramLoggerActor;
 
 namespace AkkaDiagram.Actors.Messages
 {
@@ -14,7 +12,8 @@ namespace AkkaDiagram.Actors.Messages
         private readonly string _LogActor;
         private readonly string _ActorType;
 
-        private LoggerStarted(Debug origin, string logActor, string actorType) : base(origin)
+        private LoggerStarted(Debug origin, string logActor, string actorType)
+            : base(origin)
         {
             _LogActor = logActor;
             _ActorType = actorType;
@@ -31,9 +30,9 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
-
         public static LoggerStarted? TryCreateMessage(Debug debugMsg, IList<string> config)
-            => TryCreateMessage((group)
+            => TryCreateMessage(
+                (group)
                 => new LoggerStarted(debugMsg, group["logActor"].Value, group["actorType"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,

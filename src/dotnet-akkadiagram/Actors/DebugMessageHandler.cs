@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Reflection.Metadata;
 using System.Linq;
-using System.Text;
+
 using Akka.Actor;
+using Akka.Configuration;
 using Akka.Event;
+
 using AkkaDiagram.Actors.Messages;
+
 using static AkkaDiagram.DiagramLoggerActor;
 using static AkkaDiagram.SettingsLitterals;
-using Akka.Configuration;
 
 namespace AkkaDiagram.Actors
 {
-
     public class DebugMessageHandler : ReceiveActor
     {
         private const string UNHANDLED_TEMPLATE = "[UNHANDLED] new Debug(\"{LogSource}\", Type.GetType(\"{LogClass}\"), \"{Message}\")";
@@ -22,20 +20,18 @@ namespace AkkaDiagram.Actors
         public DebugMessageHandler()
         {
             Receive<Debug>(debugMsg => Handle(debugMsg));
-
         }
 
         private void Handle(Debug debugMsg)
         {
             var handle = GetMessage(debugMsg);
 
-            //Console.WriteLine("[2][DebugHandler] " + debugMsg);
+            // Console.WriteLine("[2][DebugHandler] " + debugMsg);
             if (!(handle != null && handle.Handle()))
             {
                 var outString = UNHANDLED_TEMPLATE.Replace("{LogSource}", debugMsg.LogSource);
                 outString = outString.Replace("{LogClass}", debugMsg.LogClass.AssemblyQualifiedName);
                 outString = outString.Replace("{Message}", debugMsg.Message.ToString());
-
 
                 WriteOutputToConsole(outString, ConsoleColor.Yellow, ConsoleColor.DarkBlue);
                 WriteOutputToConsole($"[NOTAG]{nameof(Debug)}: '{debugMsg}'", ConsoleColor.Yellow, ConsoleColor.DarkBlue);
@@ -44,7 +40,6 @@ namespace AkkaDiagram.Actors
 
         private IHandleMessage? GetMessage(Debug debugMsg)
         {
-
             IHandleMessage? msg = null;
             foreach (var action in GetActions())
             {
@@ -62,7 +57,6 @@ namespace AkkaDiagram.Actors
 
         protected override void PreStart()
         {
-
             _MessageHandlers = _Config.GetStringList($"akka.diagram.{MESSAGE_HANDLERS}").ToList();
             var definedTypes = _Config.GetStringList($"akka.diagram.{DEFAULT_TYPES}").ToList<string>();
             definedTypes.AddRange(_Config.GetStringList($"akka.diagram.{CUSTOM_TYPES}"));
@@ -72,8 +66,6 @@ namespace AkkaDiagram.Actors
                 var type = Type.GetType(typeString, true)!;
                 _DefinedTypes.Add(type.Name, type);
             }
-
-
         }
 
         private IEnumerable<Func<Debug, IHandleMessage?>> GetActions()
@@ -85,11 +77,12 @@ namespace AkkaDiagram.Actors
                 var handlerType = Type.GetType(handler, true, true);
                 if (handlerType != null)
                 {
-                    //var t = handlerType.GetMethods();
+                    // var t = handlerType.GetMethods();
                     var tryCreateMessage = handlerType.GetMethod("TryCreateMessage");
                     funcs.Add(msg => (IHandleMessage?)tryCreateMessage?.Invoke(null, new object[] { msg, Context.System.Settings.Config.GetStringList($"akka.diagram.{DIAGRAM_TYPES}") }));
                 }
             }
+
             return funcs;
         }
     }

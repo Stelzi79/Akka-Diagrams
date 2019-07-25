@@ -12,7 +12,8 @@ namespace AkkaDiagram.Actors.Messages
         private readonly string _IActorRef;
         private readonly string _Cannel;
 
-        private SubscibeToChannel(Debug origin, string actorRef, string cannel) : base(origin)
+        private SubscibeToChannel(Debug origin, string actorRef, string cannel)
+            : base(origin)
         {
             _IActorRef = actorRef;
             _Cannel = cannel;
@@ -21,7 +22,8 @@ namespace AkkaDiagram.Actors.Messages
         public string Tag => nameof(SubscibeToChannel);
 
         public static SubscibeToChannel? TryCreateMessage(Debug debugMsg, IList<string> config)
-            => TryCreateMessage((group)
+            => TryCreateMessage(
+                (group)
                 => new SubscibeToChannel(debugMsg, group["IActorRefInstance"].Value, group["cannel"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
@@ -35,5 +37,4 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
     }
-
 }

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Buffers.Text;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
-using Akka.Event;
 
+using Akka.Event;
 
 namespace AkkaDiagram.Actors.Messages
 {
@@ -13,7 +11,8 @@ namespace AkkaDiagram.Actors.Messages
         private static readonly Regex _Regex = new Regex(@"(?'actorType'([a-zA-Z0-9.]*)) being removed", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         private readonly string _ActorType;
 
-        private Removed(Debug origin, string actorType) : base(origin)
+        private Removed(Debug origin, string actorType)
+            : base(origin)
         {
             _ActorType = actorType;
         }
@@ -29,9 +28,9 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
-
         public static Removed? TryCreateMessage(Debug debugMsg, IList<string> config)
-            => TryCreateMessage((group)
+            => TryCreateMessage(
+                (group)
                 => new Removed(debugMsg, group["actorType"].Value),
                 debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,

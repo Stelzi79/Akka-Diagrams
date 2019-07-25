@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
 
 namespace AkkaDiagram.Actors.Messages
 {
@@ -15,6 +11,7 @@ namespace AkkaDiagram.Actors.Messages
         private const string NO_CONSTRUCTOR = "No default constructor present";
         private readonly Dictionary<Type, MethodInfo> _Handlers = new Dictionary<Type, MethodInfo>();
         private readonly object _Instance;
+
         public OutputHandlerInfo(string typeName)
         {
             try
@@ -32,14 +29,11 @@ namespace AkkaDiagram.Actors.Messages
             }
             catch (Exception e)
             {
-
                 throw new ArgumentException($"{typeName} is no valid OutputHandler", nameof(typeName), e);
             }
-
         }
+
         public void Handle(IHandleMessage param)
             => _Handlers[param.GetType()].Invoke(_Instance, new object[] { param });
-
-
     }
 }

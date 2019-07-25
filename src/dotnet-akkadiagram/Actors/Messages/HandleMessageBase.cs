@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Metadata;
-using System.Text;
 using System.Text.RegularExpressions;
+
 using Akka.Event;
-using AkkaDiagram.Actors.Handlers;
-using static AkkaDiagram.DiagramLoggerActor;
 
 namespace AkkaDiagram.Actors.Messages
 {
@@ -26,7 +20,6 @@ namespace AkkaDiagram.Actors.Messages
             {
                 _OutputHandlers.Add(new OutputHandlerInfo(handler));
             }
-
         }
 
         public Debug Origin { get; private set; }
@@ -42,6 +35,7 @@ namespace AkkaDiagram.Actors.Messages
             {
                 handler.Handle(handledMessage);
             }
+
             return true;
         }
 
@@ -50,8 +44,9 @@ namespace AkkaDiagram.Actors.Messages
             _Config = config;
             InitOutputHandlers();
             var match = regex.Match(msg);
-            return match.Success ? initialzierFunc(match.Groups) : (default);
+            return match.Success ? initialzierFunc(match.Groups) : default;
         }
+
         protected static void WriteOutputToConsole(
             string debugMsg,
             ConsoleColor backgroundColor = ConsoleColor.Black,
