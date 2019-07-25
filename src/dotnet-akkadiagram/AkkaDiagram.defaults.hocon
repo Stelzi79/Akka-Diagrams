@@ -6,15 +6,18 @@
     # loggers = [<logger>]
     diagram {
         default-types = [
-            AkkaDiagram.Actors.Messages.DefaultLoggersStarted,
-            AkkaDiagram.Actors.Messages.LoggerStarted,
-            AkkaDiagram.Actors.Messages.NowSupervising,
-            AkkaDiagram.Actors.Messages.ReceivedHandledMessage,
-            AkkaDiagram.Actors.Messages.RegisteringUnsubscriber,
-            AkkaDiagram.Actors.Messages.Removed,
-            AkkaDiagram.Actors.Messages.Started,
-            AkkaDiagram.Actors.Messages.SubscribeToChannel,
-            AkkaDiagram.Actors.Messages.UnsubscribeFromAll
+            "AkkaDiagram.Actors.Messages.DefaultLoggersStarted, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Messages.LoggerStarted, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Messages.NowSupervising, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Messages.ReceivedHandledMessage, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Messages.RegisteringUnsubscriber, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Messages.Removed, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Messages.Started, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Messages.SubscribeToChannel, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Messages.UnsubscribeFromAll, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Handlers.ConsoleOutputHandler, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Handlers.JsonOutputHandler, dotnet-akkadiagram",
+            "AkkaDiagram.Actors.Handlers.DotFileOutputHandler, dotnet-akkadiagram"
         ]
         message-handlers = [DefaultLoggersStarted,
             LoggerStarted,
@@ -29,17 +32,16 @@
         custom-types = []
         # these get added to tthe message-handlers. If you want to overwrite the default message handling then overwrite the message-handlers
         custom-message-handlers = []
-    # Types that handle the output in the format '""{Type.FullName}, Assembly.GetName().Name""'. Defaults to 'ConsoleOutputHandler'
-    # types = [""AkkaDiagram.Actors.Handlers.ConsoleOutputHandler, dotnet-akkadiagram"",
-    # ""AkkaDiagram.Actors.Handlers.JsonOutputHandler, dotnet-akkadiagram"",
-    # ""AkkaDiagram.Actors.Handlers.DotFileOutputHandler, dotnet-akkadiagram""]
-    # Here are now all the configuration section of the individual handlers
-    # console-output-handler {
-    # }
-    # json-output-handler {
-    # }
-    # dot-file-output-handler {
-    # }
+        # Types that handle the output in the format '""{Type.FullName}, Assembly.GetName().Name""'. Defaults to 'ConsoleOutputHandler'
+        output-handlers = [ConsoleOutputHandler]
+        # types = [JsonOutputHandler]
+        # types = [DotFileOutputHandler]
+        # Here are now all the configuration section of the individual handlers
+        output-handler {
+            console {}
+            json {}
+            dot-file {}
+        }
     }
     actor {
         debug {

@@ -7,7 +7,7 @@ namespace AkkaDiagram.Actors.Handlers
 {
     public class ConsoleOutputHandler : IOutputHandler
     {
-        public void Handle(UnsubscibeFromAll msg)
+        public void Handle(UnsubscribeFromAll msg)
             => DiagramLoggerActor.WriteOutputToConsole($"[{msg.Tag}][{msg.Origin.Timestamp}] - [{msg.ActorPath}]", ConsoleColor.Green, ConsoleColor.Black);
     }
 }

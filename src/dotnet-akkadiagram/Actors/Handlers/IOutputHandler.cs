@@ -7,6 +7,6 @@ namespace AkkaDiagram.Actors.Handlers
 {
     public interface IOutputHandler
     {
-        void Handle(UnsubscibeFromAll msg);
+        void Handle(UnsubscribeFromAll msg);
     }
 }

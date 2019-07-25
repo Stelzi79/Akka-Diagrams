@@ -53,11 +53,12 @@ namespace AkkaDiagram.Actors
 
         private readonly Dictionary<string, Type> _DefinedTypes = new Dictionary<string, Type>();
         private readonly Config _Config = Context.System.Settings.Config;
-        private IList<string> _MessageHandlers = new List<string>();
+        private List<string> _MessageHandlers = new List<string>();
 
         protected override void PreStart()
         {
             _MessageHandlers = _Config.GetStringList($"akka.diagram.{MESSAGE_HANDLERS}").ToList();
+            _MessageHandlers.AddRange(_Config.GetStringList($"akka.diagram.{CUSTOM_MESSAGE_HANDLERS}"));
             var definedTypes = _Config.GetStringList($"akka.diagram.{DEFAULT_TYPES}").ToList<string>();
             definedTypes.AddRange(_Config.GetStringList($"akka.diagram.{CUSTOM_TYPES}"));
 
@@ -74,12 +75,12 @@ namespace AkkaDiagram.Actors
 
             foreach (var handler in _MessageHandlers)
             {
-                var handlerType = Type.GetType(handler, true, true);
+                var handlerType = _DefinedTypes[handler];
                 if (handlerType != null)
                 {
                     // var t = handlerType.GetMethods();
                     var tryCreateMessage = handlerType.GetMethod("TryCreateMessage");
-                    funcs.Add(msg => (IHandleMessage?)tryCreateMessage?.Invoke(null, new object[] { msg, Context.System.Settings.Config.GetStringList($"akka.diagram.{DIAGRAM_TYPES}") }));
+                    funcs.Add(msg => (IHandleMessage?)tryCreateMessage?.Invoke(null, new object[] { msg, Context.System.Settings.Config.GetStringList($"akka.diagram.{OUTPUT_HANDLERS}") }));
                 }
             }
 

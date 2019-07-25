@@ -25,6 +25,21 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackAsTool>true</PackAsTool>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <CodeAnalysisRuleSet>dotnet-akkadiagram.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <CodeAnalysisRuleSet>dotnet-akkadiagram.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Create Tool|AnyCPU'">
+      <CodeAnalysisRuleSet>dotnet-akkadiagram.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <ItemGroup>
+      <None Remove="stylecop.json" />
+    </ItemGroup>
+    <ItemGroup>
+      <AdditionalFiles Include="stylecop.json" />
+    </ItemGroup>
     <ItemGroup>
         <None Include="..\..\LICENSE">
             <Pack>True</Pack>

@@ -21,7 +21,7 @@ namespace AkkaDiagram
             var loggerType = typeof(DiagramLoggerActor);
             var handlerType = typeof(ConsoleOutputHandler);
             var loggers = $"akka.loggers = [\"{loggerType.FullName}, {loggerType.Assembly.GetName().Name}\"]";
-            var diagramTypes = $"akka.diagram.{DIAGRAM_TYPES} = [{handlerType.FullName}]";
+            var diagramTypes = $"akka.diagram.{OUTPUT_HANDLERS} = [{handlerType.FullName}]";
 
             if (string.IsNullOrWhiteSpace(diagramConfig) && string.IsNullOrWhiteSpace(fileName))
             {
@@ -34,7 +34,7 @@ namespace AkkaDiagram
 
             config = config.WithFallback(ConfigurationFactory.ParseString(diagramConfig));
             config = config.WithFallback(ConfigurationFactory.ParseString(loggers));
-            if (config.GetValue($"akka.diagram.{DIAGRAM_TYPES}") == null)
+            if (config.GetValue($"akka.diagram.{OUTPUT_HANDLERS}") == null)
             {
                 config = config.WithFallback(ConfigurationFactory.ParseString(diagramTypes));
             }
