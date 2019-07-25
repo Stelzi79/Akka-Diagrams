@@ -30,7 +30,7 @@ namespace AkkaDiagram.Actors.Messages
         public static Started? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new Started(debugMsg),
-                debugMsg.Message.ToString(),
+                debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
                 config);
     }

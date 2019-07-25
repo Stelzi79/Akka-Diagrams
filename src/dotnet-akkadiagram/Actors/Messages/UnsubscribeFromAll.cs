@@ -20,19 +20,17 @@ namespace AkkaDiagram.Actors.Messages
             ActorPath = actorPath;
         }
 
-        public bool Handle()
-        {
+        public bool Handle() =>
             //var handled = true;
 
             //WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - [{_ActorPath}]", ConsoleColor.Green, ConsoleColor.Black);
 
             //return handled;
-            return Handle(this);
-        }
+            Handle(this);
         public static UnsubscibeFromAll? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new UnsubscibeFromAll(debugMsg, group["actor"].Value),
-                debugMsg.Message.ToString(),
+                debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
                 config);
 

@@ -33,7 +33,7 @@ namespace AkkaDiagram.Actors.Messages
         public static RecievedHandledMessage? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new RecievedHandledMessage(debugMsg, group["message"].Value, group["fromActor"].Value),
-                debugMsg.Message.ToString(),
+                debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
                 config);
     }

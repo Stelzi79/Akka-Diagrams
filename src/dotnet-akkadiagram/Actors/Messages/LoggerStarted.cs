@@ -35,7 +35,7 @@ namespace AkkaDiagram.Actors.Messages
         public static LoggerStarted? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new LoggerStarted(debugMsg, group["logActor"].Value, group["actorType"].Value),
-                debugMsg.Message.ToString(),
+                debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
                 config);
     }

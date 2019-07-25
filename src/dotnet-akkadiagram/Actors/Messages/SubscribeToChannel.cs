@@ -23,7 +23,7 @@ namespace AkkaDiagram.Actors.Messages
         public static SubscibeToChannel? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new SubscibeToChannel(debugMsg, group["IActorRefInstance"].Value, group["cannel"].Value),
-                debugMsg.Message.ToString(),
+                debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
                 config);
 

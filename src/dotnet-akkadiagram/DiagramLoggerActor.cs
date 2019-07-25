@@ -10,7 +10,7 @@ namespace AkkaDiagram
 {
     public class DiagramLoggerActor : UntypedActor, ILogReceive
     {
-        private IActorRef _DebugHandler;
+        private IActorRef? _DebugHandler;
 
         protected override void OnReceive(object message)
         {

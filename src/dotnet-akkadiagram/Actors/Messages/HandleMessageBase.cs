@@ -18,27 +18,6 @@ namespace AkkaDiagram.Actors.Messages
         private static IList<string> _Config;
         private static List<OutputHandlerInfo> _OutputHandlers;
 
-        private static IList<string> Config
-        {
-            get
-            {
-                if (_Config == null || _Config.Count <= 0)
-                {
-                    throw new ApplicationException("No Output Handlers present!");
-                }
-                return _Config;
-            }
-            set
-            {
-                if (_Config == null)
-                {
-                    _Config = value;
-                    InitOutputHandlers();
-                }
-            }
-        }
-
-
         private static void InitOutputHandlers()
         {
             _OutputHandlers = new List<OutputHandlerInfo>();
@@ -59,7 +38,6 @@ namespace AkkaDiagram.Actors.Messages
 
         protected bool Handle(T handledMessage)
         {
-            var ret = false;
             foreach (var handler in _OutputHandlers)
             {
                 handler.Handle(handledMessage);
@@ -69,7 +47,8 @@ namespace AkkaDiagram.Actors.Messages
 
         private protected static T TryCreateMessage(Func<GroupCollection, T> initialzierFunc, string msg, Regex regex, IList<string> config)
         {
-            Config = config;
+            _Config = config;
+            InitOutputHandlers();
             var match = regex.Match(msg);
             return match.Success ? initialzierFunc(match.Groups) : (default);
         }

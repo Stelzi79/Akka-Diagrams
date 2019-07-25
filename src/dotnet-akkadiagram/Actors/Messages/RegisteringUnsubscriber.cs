@@ -29,7 +29,7 @@ namespace AkkaDiagram.Actors.Messages
         public static RegisteringUnsubscriber? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new RegisteringUnsubscriber(debugMsg),
-                debugMsg.Message.ToString(),
+                debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
                 config);
     }

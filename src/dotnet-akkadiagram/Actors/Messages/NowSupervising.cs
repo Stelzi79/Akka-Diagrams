@@ -34,7 +34,7 @@ namespace AkkaDiagram.Actors.Messages
         public static NowSupervising? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new NowSupervising(debugMsg, group["actorSupervised"].Value),
-                debugMsg.Message.ToString(),
+                debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
                 config);
     }

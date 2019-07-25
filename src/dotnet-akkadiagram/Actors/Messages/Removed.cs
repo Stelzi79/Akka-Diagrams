@@ -33,7 +33,7 @@ namespace AkkaDiagram.Actors.Messages
         public static Removed? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new Removed(debugMsg, group["actorType"].Value),
-                debugMsg.Message.ToString(),
+                debugMsg.Message.ToString() ?? string.Empty,
                 _Regex,
                 config);
     }

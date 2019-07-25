@@ -28,7 +28,7 @@ namespace AkkaDiagram.Actors.Messages
         public static DefaultLoggersStarted? TryCreateMessage(Debug debugMsg, IList<string> config)
             => TryCreateMessage((group)
                 => new DefaultLoggersStarted(debugMsg),
-                debugMsg.Message.ToString(),
+                debugMsg?.Message.ToString() ?? string.Empty,
                 _Regex,
                 config);
     }
