@@ -7,7 +7,7 @@
     diagram {
         # These are Type.FullName that change or extend built in behavior. Every string is supported that is valid for Type.GetType(string).
         # Coustom Typse can be refferenced here with Type.Name
-        custom-types = ["AkkaDiagram.Actors.Handlers.Console, AkkaDiagram"]
+        custom-types = []
         message-handlers = [
             DefaultLoggersStarted,
             LoggerStarted,

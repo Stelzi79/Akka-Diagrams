@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
+
 using Akka.Actor;
-using Akka.Configuration;
 using Akka.Event;
 using Akka.TestKit.Xunit2;
+
 using AkkaDiagram.Actors;
+
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace AkkaDiagram.Test
 {
@@ -22,17 +21,17 @@ namespace AkkaDiagram.Test
         private const string CONF = @"akka{
 
 diagram{
-types = [""AkkaDiagram.Actors.Handlers.ConsoleOutputHandler, dotnet-akkadiagram""]
-message-handlers =
-                               [AkkaDiagram.Actors.Messages.DefaultLoggersStarted,
-                                AkkaDiagram.Actors.Messages.LoggerStarted,
-                                AkkaDiagram.Actors.Messages.NowSupervising,
-                                AkkaDiagram.Actors.Messages.RecievedHandledMessage,
-                                AkkaDiagram.Actors.Messages.RegisteringUnsubscriber,
-                                AkkaDiagram.Actors.Messages.Removed,
-                                AkkaDiagram.Actors.Messages.Started,
-                                AkkaDiagram.Actors.Messages.SubscibeToChannel,
-                                AkkaDiagram.Actors.Messages.UnsubscibeFromAll]
+output-handlers = [Console]
+message-handlers = [
+            DefaultLoggersStarted,
+            LoggerStarted,
+            NowSupervising,
+            ReceivedHandledMessage,
+            RegisteringUnsubscriber,
+            Removed,
+            Started,
+            SubscribeToChannel,
+            UnsubscribeFromAll]
 }
 }
 ";
@@ -73,18 +72,17 @@ message-handlers =
             Thread.Sleep(timeout);
             expected = expected.Replace("{time}", debugMsg.Timestamp.ToString());
             expected = expected.Replace("{msg}", debugMsg.ToString());
-            expected += "\r\n";
 
             //assert
             //Assert.Equal(expected, sw.ToString(), ignoreLineEndingDifferences: true, ignoreWhiteSpaceDifferences: true);
 
             probe.AwaitCondition(() =>
             {
-                var condition = (expected == sw.ToString());
+                var condition = (expected == sw.ToString().Trim());
                 if (!condition)
                 {
                     _Output.WriteLine($"Expected: '{expected}'");
-                    _Output.WriteLine($"Actual: '{sw.ToString()}'");
+                    _Output.WriteLine($"Actual: '{sw.ToString().Trim()}'");
                 }
                 return condition;
             }, timeout);

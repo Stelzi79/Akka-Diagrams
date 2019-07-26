@@ -21,7 +21,7 @@ namespace AkkaDiagram.Actors.Handlers
 
         public OutputHandlerInfo(Type type, Config config)
         {
-            _Config = config;
+            _Config = config ?? new Config();
 
             try
             {
@@ -42,7 +42,7 @@ namespace AkkaDiagram.Actors.Handlers
             }
         }
 
-        public bool ShouldHandle(string handledMessage) => _Config.GetStringList(MESSAGE_HANDLERS).Contains(handledMessage);
+        public bool ShouldHandle(string handledMessage) => _Config.IsEmpty || _Config.GetStringList(MESSAGE_HANDLERS).Contains(handledMessage);
 
         public OutputHandlerInfo(string typeName, Config config)
             : this(Type.GetType(typeName, true)!, config)
