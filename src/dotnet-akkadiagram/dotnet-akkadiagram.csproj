@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
+        <OutputType>Library</OutputType>
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
         <!--<Runnable>true</Runnable>-->
@@ -19,6 +19,8 @@
         <Nullable>enable</Nullable>
         <Configurations>Debug;Release;Debug Create Tool</Configurations>
         <StyleCopTreatErrorsAsWarnings>True</StyleCopTreatErrorsAsWarnings>
+        <ApplicationIcon />
+        <StartupObject />
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)'=='Debug Create Tool'">
         <!--Enables the Target Pack only on Debug|AnyCPU-->

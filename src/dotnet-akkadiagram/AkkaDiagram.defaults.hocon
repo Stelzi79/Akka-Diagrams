@@ -5,23 +5,11 @@
     log-config-on-start = off
     # loggers = [<logger>]
     diagram {
-        default-types = [
-            "AkkaDiagram.Actors.Messages.DefaultLoggersStarted, dotnet-akkadiagram",
-            "AkkaDiagram.Actors.Messages.LoggerStarted, dotnet-akkadiagram",
-            "AkkaDiagram.Actors.Messages.NowSupervising, dotnet-akkadiagram",
-            "AkkaDiagram.Actors.Messages.ReceivedHandledMessage, dotnet-akkadiagram",
-            "AkkaDiagram.Actors.Messages.RegisteringUnsubscriber, dotnet-akkadiagram",
-            "AkkaDiagram.Actors.Messages.Removed, dotnet-akkadiagram",
-            "AkkaDiagram.Actors.Messages.Started, dotnet-akkadiagram",
-            "AkkaDiagram.Actors.Messages.SubscribeToChannel, dotnet-akkadiagram",
-            "AkkaDiagram.Actors.Messages.UnsubscribeFromAll, dotnet-akkadiagram",
-            "AkkaDiagram.Actors.Handlers.Console, dotnet-akkadiagram",
-        # "AkkaDiagram.Actors.Handlers.Json, dotnet-akkadiagram",
-        # "AkkaDiagram.Actors.Handlers.DotFile, dotnet-akkadiagram"
-        ]
         # These are Type.FullName that change or extend built in behavior. Every string is supported that is valid for Type.GetType(string).
-        custom-types = []
-        message-handlers = [DefaultLoggersStarted,
+        # Coustom Typse can be refferenced here with Type.Name
+        custom-types = ["AkkaDiagram.Actors.Handlers.Console, dotnet-akkadiagram"]
+        message-handlers = [
+            DefaultLoggersStarted,
             LoggerStarted,
             NowSupervising,
             ReceivedHandledMessage,
@@ -39,7 +27,7 @@
         # Here are now all the configuration section of the individual handlers
         output-handler {
             console {
-            # message-handlers = [UnsubscribeFromAll]
+                message-handlers = [UnsubscribeFromAll]
             }
             json {}
             dotfile {}

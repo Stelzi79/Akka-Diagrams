@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 using Akka.Event;
+
+using AkkaDiagram.Actors.Handlers;
 
 namespace AkkaDiagram.Actors.Messages
 {
@@ -30,7 +33,9 @@ namespace AkkaDiagram.Actors.Messages
 
         protected bool Handle(T handledMessage)
         {
-            foreach (var handler in _OutputHandlers)
+            var test = _OutputHandlers.Where(msg => msg.ShouldHandle(handledMessage.Tag));
+
+            foreach (var handler in test)
             {
                 handler.Handle(handledMessage);
             }

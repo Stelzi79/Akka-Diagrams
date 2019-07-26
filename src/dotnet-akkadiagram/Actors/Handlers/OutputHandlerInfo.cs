@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace AkkaDiagram.Actors.Messages
+using Akka.Configuration;
+
+using AkkaDiagram.Actors.Messages;
+
+using static AkkaDiagram.SettingsLitterals;
+
+namespace AkkaDiagram.Actors.Handlers
 {
     public class OutputHandlerInfo
     {
@@ -11,9 +17,12 @@ namespace AkkaDiagram.Actors.Messages
         private const string NO_CONSTRUCTOR = "No default constructor present";
         private readonly Dictionary<Type, MethodInfo> _Handlers = new Dictionary<Type, MethodInfo>();
         private readonly object _Instance;
+        private readonly Config _Config;
 
-        public OutputHandlerInfo(Type type)
+        public OutputHandlerInfo(Type type, Config config)
         {
+            _Config = config;
+
             try
             {
                 Name = type.Name;
@@ -33,8 +42,10 @@ namespace AkkaDiagram.Actors.Messages
             }
         }
 
-        public OutputHandlerInfo(string typeName)
-            : this(Type.GetType(typeName, true)!)
+        public bool ShouldHandle(string handledMessage) => _Config.GetStringList(MESSAGE_HANDLERS).Contains(handledMessage);
+
+        public OutputHandlerInfo(string typeName, Config config)
+            : this(Type.GetType(typeName, true)!, config)
         {
         }
 

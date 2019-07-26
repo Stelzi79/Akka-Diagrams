@@ -4,6 +4,8 @@ using System.Text.RegularExpressions;
 
 using Akka.Event;
 
+using AkkaDiagram.Actors.Handlers;
+
 namespace AkkaDiagram.Actors.Messages
 {
     internal class RegisteringUnsubscriber : HandleMessageBase<RegisteringUnsubscriber>, IHandleMessage

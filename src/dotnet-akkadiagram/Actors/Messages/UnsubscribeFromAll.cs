@@ -3,6 +3,8 @@ using System.Text.RegularExpressions;
 
 using Akka.Event;
 
+using AkkaDiagram.Actors.Handlers;
+
 namespace AkkaDiagram.Actors.Messages
 {
     public class UnsubscribeFromAll : HandleMessageBase<UnsubscribeFromAll>, IHandleMessage
