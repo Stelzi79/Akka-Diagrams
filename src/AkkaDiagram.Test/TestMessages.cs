@@ -6,7 +6,6 @@ using Akka.Event;
 
 namespace AkkaDiagram.Test
 {
-
     public class TestMessages : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator()
@@ -85,6 +84,5 @@ namespace AkkaDiagram.Test
 
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
     }
 }
