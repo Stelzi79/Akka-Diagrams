@@ -60,7 +60,6 @@ namespace AkkaDiagram.Actors
         }
 
         private readonly IDictionary<string, Type> _DefinedTypes = Defaults.BuiltInTypes();
-        // private readonly IDictionary<string, Config> _OutputHandlerConfig = new Dictionary<string, Config>();
 
         private readonly Config _Config = Context.System.Settings.Config;
         private readonly IList<OutputHandlerInfo> _OutputHandlers = new List<OutputHandlerInfo>();

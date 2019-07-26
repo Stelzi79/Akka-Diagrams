@@ -5,5 +5,7 @@ namespace AkkaDiagram.Actors.Handlers
     public interface IOutputHandler
     {
         void Handle(UnsubscribeFromAll msg);
+
+        void Handle(NowSupervising msg);
     }
 }

@@ -27,7 +27,7 @@
         # Here are now all the configuration section of the individual handlers
         output-handler {
             console {
-                message-handlers = [UnsubscribeFromAll]
+                message-handlers = [UnsubscribeFromAll, NowSupervising]
             }
             json {}
             dotfile {}

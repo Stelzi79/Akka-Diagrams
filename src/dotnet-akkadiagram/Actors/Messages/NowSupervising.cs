@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using Akka.Event;
@@ -8,29 +7,31 @@ using AkkaDiagram.Actors.Handlers;
 
 namespace AkkaDiagram.Actors.Messages
 {
-    internal class NowSupervising : HandleMessageBase<NowSupervising>, IHandleMessage
+    public class NowSupervising : HandleMessageBase<NowSupervising>, IHandleMessage
     {
         private static readonly Regex _Regex = new Regex(@"^now supervising (?'actorSupervised'.*)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-        private readonly string _ActorSupervised;
-        private readonly string _ActorSuperviser;
+
+        public string ActorSupervised { get; }
+
+        public string ActorSuperviser { get; }
 
         private NowSupervising(Debug origin, string actorSupervised)
             : base(origin)
         {
-            _ActorSupervised = actorSupervised;
-            _ActorSuperviser = Origin.LogSource;
+            ActorSupervised = actorSupervised;
+            ActorSuperviser = Origin.LogSource;
         }
 
         public string Tag => nameof(NowSupervising);
 
-        public bool Handle()
-        {
-            var handled = true;
+        public bool Handle() =>
 
-            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - {_ActorSuperviser} supervises {_ActorSupervised}", ConsoleColor.Green, ConsoleColor.Black);
+            //var handled = true;
 
-            return handled;
-        }
+            //WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - {_ActorSuperviser} supervises {_ActorSupervised}", ConsoleColor.Green, ConsoleColor.Black);
+
+            //return handled;
+            Handle(this);
 
         public static NowSupervising? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(
