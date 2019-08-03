@@ -4,10 +4,7 @@ using System.IO;
 using Akka.Actor;
 using Akka.Configuration;
 
-using AkkaDiagram;
-
 using SomeActorSystem.Actors;
-
 
 namespace SomeActorSystem
 {
@@ -26,6 +23,7 @@ namespace SomeActorSystem
         ///             akka://SomeActorCluster/user/SomeUserActor/NestedSubActor/SubActorNested3
         /// </summary>
         /// <param name="args"></param>
+
         private static void Main(string[] args)
         {
             Console.WriteLine("Create Akka System ...");
