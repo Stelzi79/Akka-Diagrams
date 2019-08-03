@@ -7,10 +7,14 @@ using AkkaDiagram.Actors;
 
 namespace AkkaDiagram
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class DiagramLoggerActor : UntypedActor, ILogReceive
     {
         private IActorRef? _DebugHandler;
 
+        /// <inheritdoc/>
         protected override void OnReceive(object message)
         {
             var unhandled = "[1] " + message;
@@ -45,12 +49,17 @@ namespace AkkaDiagram
                 Console.WriteLine("[1][Unhandled] " + unhandled);
         }
 
-        private bool IsMessageForSelf(string strMsg) =>
-               strMsg.Contains(Self.Path.ToStringWithUid())
-            || strMsg.Contains($"[{nameof(DiagramLoggerActor)}]");
+        //private bool IsMessageForSelf(string strMsg) =>
+        //       strMsg.Contains(Self.Path.ToStringWithUid())
+        //    || strMsg.Contains($"[{nameof(DiagramLoggerActor)}]");
 
-        public static void WriteOutputToConsole(
-            string debugMsg,
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="debugMsg"></param>
+        /// <param name="backgroundColor"></param>
+        /// <param name="forgroundColor"></param>
+        public static void WriteOutputToConsole(string debugMsg,
             ConsoleColor backgroundColor = ConsoleColor.Black,
             ConsoleColor forgroundColor = ConsoleColor.White)
         {
