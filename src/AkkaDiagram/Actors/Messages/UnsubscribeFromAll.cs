@@ -16,18 +16,9 @@ namespace AkkaDiagram.Actors.Messages
         public string Tag => nameof(UnsubscribeFromAll);
 
         private UnsubscribeFromAll(Debug origin, string actorPath)
-            : base(origin)
-        {
-            ActorPath = actorPath;
-        }
+            : base(origin) => ActorPath = actorPath;
 
         public bool Handle() =>
-
-            // var handled = true;
-
-            // WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - [{_ActorPath}]", ConsoleColor.Green, ConsoleColor.Black);
-
-            // return handled;
             Handle(this);
 
         public static UnsubscribeFromAll? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)

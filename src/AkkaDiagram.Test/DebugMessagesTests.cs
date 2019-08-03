@@ -17,9 +17,7 @@ namespace AkkaDiagram.Test
     {
         private readonly ITestOutputHelper _Output;
 
-
-        private const string CONF = @"akka{
-
+        private const string _CONF = @"akka{
 diagram{
 output-handlers = [Console]
 message-handlers = [
@@ -36,7 +34,7 @@ message-handlers = [
 }
 ";
 
-        public DebugMessagesTests(ITestOutputHelper output) : base(CONF)
+        public DebugMessagesTests(ITestOutputHelper output) : base(_CONF)
         {
             using var standardOut = new StreamWriter(Console.OpenStandardOutput())
             {
@@ -75,15 +73,19 @@ message-handlers = [
 
             //assert
             //Assert.Equal(expected, sw.ToString(), ignoreLineEndingDifferences: true, ignoreWhiteSpaceDifferences: true);
-
+            var actual = string.Empty;
             probe.AwaitCondition(() =>
             {
                 var condition = (expected == sw.ToString().Trim());
-                if (!condition)
+                if (!condition && !string.IsNullOrWhiteSpace(actual)) // This if-else is simply here to have some proper formated output for the XUnit test runner to be shown without using the clutch of ITestOutputHelper.
                 {
-                    _Output.WriteLine($"Expected: '{expected}'");
-                    _Output.WriteLine($"Actual: '{sw.ToString().Trim()}'");
+                    Assert.Equal(expected, actual);
                 }
+                else
+                {
+                    actual = sw.ToString().Trim();
+                }
+
                 return condition;
             }, timeout);
         }

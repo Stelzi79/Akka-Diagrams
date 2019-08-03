@@ -7,5 +7,7 @@ namespace AkkaDiagram.Actors.Handlers
         void Handle(UnsubscribeFromAll msg);
 
         void Handle(NowSupervising msg);
+
+        void Handle(SubscribeToChannel msg);
     }
 }

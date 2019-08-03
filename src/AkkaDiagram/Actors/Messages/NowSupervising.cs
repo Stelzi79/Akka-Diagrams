@@ -25,12 +25,6 @@ namespace AkkaDiagram.Actors.Messages
         public string Tag => nameof(NowSupervising);
 
         public bool Handle() =>
-
-            //var handled = true;
-
-            //WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - {_ActorSuperviser} supervises {_ActorSupervised}", ConsoleColor.Green, ConsoleColor.Black);
-
-            //return handled;
             Handle(this);
 
         public static NowSupervising? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
