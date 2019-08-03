@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
 using Akka.Actor;
 using Akka.Event;
-using Akka.Pattern;
+
 using AkkaDiagram.Actors;
 
 namespace AkkaDiagram
 {
     public class DiagramLoggerActor : UntypedActor, ILogReceive
     {
-        private IActorRef _DebugHandler;
+        private IActorRef? _DebugHandler;
 
         protected override void OnReceive(object message)
         {
@@ -18,7 +17,6 @@ namespace AkkaDiagram
 
             switch (message)
             {
-
                 case InitializeLogger initMsg:
                     _DebugHandler = Context.ActorOf<DebugMessageHandler>();
                     WriteOutputToConsole($"{nameof(DiagramLoggerActor)} initiated!", ConsoleColor.Yellow, ConsoleColor.Black);
@@ -32,17 +30,17 @@ namespace AkkaDiagram
 
                     break;
                 case Error errorMsg:
-                //break;
+                // break;
                 case Warning warningMsg:
-                //break;
+                // break;
                 case Info infoMsg:
-                //break;
+                // break;
                 default:
                     WriteOutputToConsole($"{message.GetType().Name} Message: '{message}'", ConsoleColor.White, ConsoleColor.Black);
                     unhandled = string.Empty;
                     break;
-
             }
+
             if (!string.IsNullOrEmpty(unhandled))
                 Console.WriteLine("[1][Unhandled] " + unhandled);
         }
@@ -51,9 +49,10 @@ namespace AkkaDiagram
                strMsg.Contains(Self.Path.ToStringWithUid())
             || strMsg.Contains($"[{nameof(DiagramLoggerActor)}]");
 
-        public static void WriteOutputToConsole(string debugMsg,
-                                                ConsoleColor backgroundColor = ConsoleColor.Black,
-                                                ConsoleColor forgroundColor = ConsoleColor.White)
+        public static void WriteOutputToConsole(
+            string debugMsg,
+            ConsoleColor backgroundColor = ConsoleColor.Black,
+            ConsoleColor forgroundColor = ConsoleColor.White)
         {
             Console.BackgroundColor = backgroundColor;
             Console.ForegroundColor = forgroundColor;

@@ -1,0 +1,32 @@
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+using Akka.Event;
+
+using AkkaDiagram.Actors.Handlers;
+
+namespace AkkaDiagram.Actors.Messages
+{
+    public class UnsubscribeFromAll : HandleMessageBase<UnsubscribeFromAll>, IHandleMessage
+    {
+        private static readonly Regex _Regex = new Regex(@"unsubscribing \[(?'actor'.*)\] from all channels$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+
+        public string ActorPath { get; }
+
+        public string Tag => nameof(UnsubscribeFromAll);
+
+        private UnsubscribeFromAll(Debug origin, string actorPath)
+            : base(origin) => ActorPath = actorPath;
+
+        public bool Handle() =>
+            Handle(this);
+
+        public static UnsubscribeFromAll? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
+            => TryCreateMessage(
+                (group)
+                => new UnsubscribeFromAll(debugMsg, group["actor"].Value),
+                debugMsg.Message.ToString() ?? string.Empty,
+                _Regex,
+                handlers);
+    }
+}

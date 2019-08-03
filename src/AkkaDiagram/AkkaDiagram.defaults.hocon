@@ -1,0 +1,45 @@
+﻿akka {
+    # Options: OFF, ERROR, WARNING, INFO, DEBUG
+    stdout-loglevel = off
+    loglevel = DEBUG
+    log-config-on-start = off
+    # loggers = [<logger>]
+    diagram {
+        # These are Type.FullName that change or extend built in behavior. Every string is supported that is valid for Type.GetType(string).
+        # Coustom Typse can be refferenced here with Type.Name
+        custom-types = []
+        message-handlers = [
+            DefaultLoggersStarted,
+            LoggerStarted,
+            NowSupervising,
+            ReceivedHandledMessage,
+            RegisteringUnsubscriber,
+            Removed,
+            Started,
+            SubscribeToChannel,
+            UnsubscribeFromAll]
+        # these get added to tthe message-handlers. If you want to overwrite the default message handling then overwrite the message-handlers
+        custom-message-handlers = []
+        # Types that handle the output in the format '""{Type.FullName}, Assembly.GetName().Name""'. Defaults to 'ConsoleOutputHandler'
+        output-handlers = [Console]
+        # types = [JsonOutputHandler]
+        # types = [DotFileOutputHandler]
+        # Here are now all the configuration section of the individual handlers
+        output-handler {
+            console {
+                message-handlers = [UnsubscribeFromAll, NowSupervising]
+            }
+            json {}
+            dotfile {}
+        }
+    }
+    actor {
+        debug {
+            receive = on # log any received message
+            autoreceive = on # log automatically received messages, e.g. PoisonPill
+            lifecycle = on # log actor lifecycle changes
+            event-stream = on # log subscription changes for Akka.NET event stream
+            unhandled = on # log unhandled messages sent to actors
+        }
+    }
+}
