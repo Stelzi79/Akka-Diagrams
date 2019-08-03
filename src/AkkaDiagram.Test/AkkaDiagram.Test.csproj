@@ -5,6 +5,8 @@
         <RootNamespace>AkkaDiagram.Test</RootNamespace>
 
         <IsPackable>false</IsPackable>
+        <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+        <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>..\AkkaDiagram.ruleset</CodeAnalysisRuleSet>
