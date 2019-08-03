@@ -22,8 +22,7 @@ namespace SomeActorSystem
         ///             akka://SomeActorCluster/user/SomeUserActor/NestedSubActor/SubActorNested2
         ///             akka://SomeActorCluster/user/SomeUserActor/NestedSubActor/SubActorNested3
         /// </summary>
-        /// <param name="args"></param>
-
+        /// <param name="args">Currently not used</param>
         private static void Main(string[] args)
         {
             Console.WriteLine("Create Akka System ...");
