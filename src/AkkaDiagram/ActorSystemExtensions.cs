@@ -1,15 +1,30 @@
 ﻿using System;
 using System.IO;
+
 using Akka.Configuration;
-using AkkaDiagram.Actors.Handlers;
-using static AkkaDiagram.SettingsLitterals;
+
+using static AkkaDiagram.SettingsLiterals;
 
 namespace AkkaDiagram
 {
+    /// <summary>
+    /// Extension Methods to inject the AkkaDiagram logger and set it up with default configurations
+    /// </summary>
     public static class ActorSystemExtensions
     {
-        private const string DEFAULT_CONFIG = "AkkaDiagram.defaults.hocon";
+        /// <summary>
+        ///
+        /// </summary>
+        public const string DEFAULT_CONFIG = "AkkaDiagram.defaults.hocon";
 
+        /// <summary>
+        /// This injects the needed debug-logging configuration and adds the diagram actor
+        ///    Be aware of stuff not working if you change debug and logging in config before you inject AkkaDiagrams!
+        /// </summary>
+        /// <param name="config">Akka.Configuration.Config</param>
+        /// <param name="diagramConfig">HOCON string of configurations</param>
+        /// <param name="fileName">Filename of HOCON configurations</param>
+        /// <returns><paramref name="config"/></returns>
         public static Config InjectAkkaDiagrams(
             this Config config,
             string? diagramConfig = null,

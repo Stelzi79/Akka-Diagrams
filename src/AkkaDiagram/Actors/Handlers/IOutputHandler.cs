@@ -2,8 +2,12 @@
 
 namespace AkkaDiagram.Actors.Handlers
 {
+    /// <summary>
+    ///
+    /// </summary>
     public interface IOutputHandler
     {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         void Handle(UnsubscribeFromAll msg);
 
         void Handle(SubscribeToChannel msg);
@@ -21,5 +25,6 @@ namespace AkkaDiagram.Actors.Handlers
         void Handle(LoggerStarted msg);
 
         void Handle(DefaultLoggersStarted msg);
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }

@@ -8,6 +8,9 @@ using AkkaDiagram.Actors.Handlers;
 
 namespace AkkaDiagram.Actors.Messages
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class DefaultLoggersStarted : HandleMessageBase<DefaultLoggersStarted>, IHandleMessage
     {
         private static readonly Regex _Regex = new Regex(@"^Default Loggers started$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
@@ -17,8 +20,10 @@ namespace AkkaDiagram.Actors.Messages
         {
         }
 
+        /// <inheritdoc/>
         public string Tag => nameof(DefaultLoggersStarted);
 
+        /// <inheritdoc/>
         public bool Handle()
         {
             var handled = true;
@@ -28,6 +33,12 @@ namespace AkkaDiagram.Actors.Messages
             return handled;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="debugMsg"></param>
+        /// <param name="handlers"></param>
+        /// <returns>DefaultLoggersStarted</returns>
         public static DefaultLoggersStarted? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(
                 (group)

@@ -17,31 +17,20 @@
         <LocalPackageSource>$(SolutionDir)..\.nupkg</LocalPackageSource>
         <LangVersion>preview</LangVersion>
         <Nullable>enable</Nullable>
-        <Configurations>Debug;Release;Debug Create Tool</Configurations>
+        <Configurations>Debug;Release</Configurations>
         <StyleCopTreatErrorsAsWarnings>True</StyleCopTreatErrorsAsWarnings>
         <ApplicationIcon />
         <StartupObject />
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)'=='Debug Create Tool'">
-        <!--Enables the Target Pack only on Debug|AnyCPU-->
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackAsTool>true</PackAsTool>
+        <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+        <!--<NoWarn>$(NoWarn),1573,1591,1712</NoWarn>-->
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <CodeAnalysisRuleSet>dotnet-akkadiagram.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>..\AkkaDiagram.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <CodeAnalysisRuleSet>dotnet-akkadiagram.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>..\AkkaDiagram.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Create Tool|AnyCPU'">
-        <CodeAnalysisRuleSet>dotnet-akkadiagram.ruleset</CodeAnalysisRuleSet>
-    </PropertyGroup>
-    <ItemGroup>
-        <None Remove="stylecop.json" />
-    </ItemGroup>
-    <ItemGroup>
-        <AdditionalFiles Include="stylecop.json" />
-    </ItemGroup>
+
     <ItemGroup>
         <None Include="..\..\LICENSE">
             <Pack>True</Pack>
@@ -50,8 +39,8 @@
         </None>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Akka" Version="1.3.13" />
-        <PackageReference Include="MinVer" Version="1.1.0-beta.2">
+        <PackageReference Include="Akka" Version="1.3.14" />
+        <PackageReference Include="MinVer" Version="1.2.0-beta.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -66,14 +55,4 @@
         </None>
     </ItemGroup>
     <!--This Target runs after Pack, deletes an existing package in the local $(LocalPackageSource) and adds this new $(PackedNupkg) to it.-->
-    <Target Name="nuget-add-to-local-source" AfterTargets="Pack" Condition="'$(Configuration)'=='Debug Create Tool'">
-        <PropertyGroup>
-            <PackedNupkg>$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg</PackedNupkg>
-            <InstalledPackagePath>$(LocalPackageSource)\$(PackageId)\$(PackageVersion)</InstalledPackagePath>
-        </PropertyGroup>
-        <Message Importance="high" Text="Check if '$(InstalledPackagePath)' exists and deletes it ..." />
-        <RemoveDir Condition="Exists('$(InstalledPackagePath)')" Directories="$(InstalledPackagePath)" />
-        <Message Importance="high" Text="Adding Package '$(PackedNupkg)' into the local Package source '$(LocalPackageSource)' ..." />
-        <Exec Command="nuget add &quot;$(PackedNupkg)&quot; -Source &quot;$(LocalPackageSource)&quot; -NonInteractive -Verbosity detailed" />
-    </Target>
 </Project>
