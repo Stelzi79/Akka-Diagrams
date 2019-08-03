@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
+
 using Akka.Actor;
 using Akka.Event;
 using Akka.TestKit.Xunit2;
+
 using AkkaDiagram.Actors;
+
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace AkkaDiagram.Test
 {
@@ -17,7 +17,24 @@ namespace AkkaDiagram.Test
     {
         private readonly ITestOutputHelper _Output;
 
-        public DebugMessagesTests(ITestOutputHelper output)
+        private const string _CONF = @"akka{
+diagram{
+output-handlers = [Console]
+message-handlers = [
+            DefaultLoggersStarted,
+            LoggerStarted,
+            NowSupervising,
+            ReceivedHandledMessage,
+            RegisteringUnsubscriber,
+            Removed,
+            Started,
+            SubscribeToChannel,
+            UnsubscribeFromAll]
+}
+}
+";
+
+        public DebugMessagesTests(ITestOutputHelper output) : base(_CONF)
         {
             using var standardOut = new StreamWriter(Console.OpenStandardOutput())
             {
@@ -29,7 +46,10 @@ namespace AkkaDiagram.Test
 
         [Theory]
         [ClassData(typeof(TestMessages))]
-        public void ShouldDedectAndWriteDebugMessages(Debug debugMsg, String expected, TimeSpan timeout, bool ignore = false)
+        public void ShouldDedectAndWriteDebugMessages(Debug debugMsg,
+                                                      string expected,
+                                                      TimeSpan timeout,
+                                                      bool ignore = false)
         {
             if (ignore)
             {
@@ -50,19 +70,22 @@ namespace AkkaDiagram.Test
             Thread.Sleep(timeout);
             expected = expected.Replace("{time}", debugMsg.Timestamp.ToString());
             expected = expected.Replace("{msg}", debugMsg.ToString());
-            expected += "\r\n";
 
             //assert
             //Assert.Equal(expected, sw.ToString(), ignoreLineEndingDifferences: true, ignoreWhiteSpaceDifferences: true);
-
+            var actual = string.Empty;
             probe.AwaitCondition(() =>
             {
-                var condition = (expected == sw.ToString());
-                if (!condition)
+                var condition = (expected == sw.ToString().Trim());
+                if (!condition && !string.IsNullOrWhiteSpace(actual)) // This if-else is simply here to have some proper formated output for the XUnit test runner to be shown without using the clutch of ITestOutputHelper.
                 {
-                    _Output.WriteLine($"Expected: '{expected}'");
-                    _Output.WriteLine($"Actual: '{sw.ToString()}'");
+                    Assert.Equal(expected, actual);
                 }
+                else
+                {
+                    actual = sw.ToString().Trim();
+                }
+
                 return condition;
             }, timeout);
         }

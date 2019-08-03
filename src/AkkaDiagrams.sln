@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.28822.285
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SomeActorSystem", "SomeActorSystem\SomeActorSystem.csproj", "{CC48CEED-8301-4F6F-A8D1-5B17BAF041C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet-akkadiagram", "dotnet-akkadiagram\dotnet-akkadiagram.csproj", "{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkkaDiagram", "AkkaDiagram\AkkaDiagram.csproj", "{B5EE328B-CA94-44AB-96FB-B5A5BACF5B9E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet-akkadiagram.Test", "dotnet-akkadiagram.Test\dotnet-akkadiagram.Test.csproj", "{0321E127-6EDD-4035-A0EE-68F5F9ED4572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkkaDiagram.Test", "AkkaDiagram.Test\AkkaDiagram.Test.csproj", "{0321E127-6EDD-4035-A0EE-68F5F9ED4572}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
