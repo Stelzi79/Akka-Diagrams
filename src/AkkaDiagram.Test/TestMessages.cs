@@ -81,7 +81,6 @@ namespace AkkaDiagram.Test
             //              ""),
             //    "",
             //    new TimeSpan(0, 0, 0, 0, 200)};
-
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
