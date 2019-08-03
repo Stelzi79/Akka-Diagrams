@@ -8,11 +8,11 @@ using AkkaDiagram.Actors.Handlers;
 
 namespace AkkaDiagram.Actors.Messages
 {
-    internal class RegisteringUnsubscriber : HandleMessageBase<RegisteringUnsubscriber>, IHandleMessage
+    public class RegisteringUnsubscriber : HandleMessageBase<RegisteringUnsubscriber>, IHandleMessage
     {
         private static readonly Regex _Regex = new Regex(@"^registering unsubscriber with (?'EventStreamType'.*)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
-        private Type UnsubscriberType => Origin.LogClass;
+        public Type UnsubscriberType => Origin.LogClass;
 
         private RegisteringUnsubscriber(Debug origin)
             : base(origin)
@@ -21,14 +21,8 @@ namespace AkkaDiagram.Actors.Messages
 
         public string Tag => nameof(RegisteringUnsubscriber);
 
-        public bool Handle()
-        {
-            var handled = true;
-
-            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - with {UnsubscriberType.FullName}", ConsoleColor.Green, ConsoleColor.Black);
-
-            return handled;
-        }
+        public bool Handle() =>
+            Handle(this);
 
         public static RegisteringUnsubscriber? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(

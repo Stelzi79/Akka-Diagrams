@@ -26,10 +26,7 @@ namespace AkkaDiagram.Actors.Messages
         //}
         public Debug Origin { get; private set; }
 
-        protected HandleMessageBase(Debug origin)
-        {
-            Origin = origin;
-        }
+        protected HandleMessageBase(Debug origin) => Origin = origin;
 
         protected bool Handle(T handledMessage)
         {

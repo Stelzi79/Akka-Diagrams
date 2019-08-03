@@ -8,24 +8,18 @@ using AkkaDiagram.Actors.Handlers;
 
 namespace AkkaDiagram.Actors.Messages
 {
-    internal class Started : HandleMessageBase<Started>, IHandleMessage
+    public class Started : HandleMessageBase<Started>, IHandleMessage
     {
         private static readonly Regex _Regex = new Regex(@"Started \((?'actorType'([a-zA-Z0-9.+]*))\)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
-        private string StartedActorPath => Origin.LogSource;
+        public string StartedActorPath => Origin.LogSource;
 
         private Type ActorType => Origin.LogClass;
 
         public string Tag => nameof(Started);
 
-        public bool Handle()
-        {
-            var handled = true;
-
-            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - [{StartedActorPath}]", ConsoleColor.Green, ConsoleColor.Black);
-
-            return handled;
-        }
+        public bool Handle() =>
+         Handle(this);
 
         private Started(Debug origin)
             : base(origin)

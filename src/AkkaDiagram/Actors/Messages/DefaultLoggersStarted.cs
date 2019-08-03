@@ -8,7 +8,7 @@ using AkkaDiagram.Actors.Handlers;
 
 namespace AkkaDiagram.Actors.Messages
 {
-    internal class DefaultLoggersStarted : HandleMessageBase<DefaultLoggersStarted>, IHandleMessage
+    public class DefaultLoggersStarted : HandleMessageBase<DefaultLoggersStarted>, IHandleMessage
     {
         private static readonly Regex _Regex = new Regex(@"^Default Loggers started$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 

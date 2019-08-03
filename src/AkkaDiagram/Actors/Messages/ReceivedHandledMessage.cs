@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using Akka.Event;
@@ -8,31 +7,27 @@ using AkkaDiagram.Actors.Handlers;
 
 namespace AkkaDiagram.Actors.Messages
 {
-    internal class ReceivedHandledMessage : HandleMessageBase<ReceivedHandledMessage>, IHandleMessage
+    public class ReceivedHandledMessage : HandleMessageBase<ReceivedHandledMessage>, IHandleMessage
     {
         private static readonly Regex _Regex = new Regex(@"^received handled message (?'message'.*) from (?'fromActor'.*)$", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-        private readonly string _Message;
-        private readonly string _FromActor;
 
-        private string ReceivedActor => Origin.LogSource;
+        public string Message { get; }
+
+        public string FromActor { get; }
+
+        public string ReceivedActor => Origin.LogSource;
 
         public string Tag => nameof(ReceivedHandledMessage);
 
         public ReceivedHandledMessage(Debug origin, string message, string fromActor)
             : base(origin)
         {
-            _Message = message;
-            _FromActor = fromActor;
+            Message = message;
+            FromActor = fromActor;
         }
 
-        public bool Handle()
-        {
-            var handled = true;
-
-            WriteOutputToConsole($"[{Tag}][{Origin.Timestamp}] - [{ReceivedActor}] handled message '{_Message}' from [{_FromActor}]", ConsoleColor.Green, ConsoleColor.Black);
-
-            return handled;
-        }
+        public bool Handle() =>
+            Handle(this);
 
         public static ReceivedHandledMessage? TryCreateMessage(Debug debugMsg, IList<OutputHandlerInfo> handlers)
             => TryCreateMessage(

@@ -16,12 +16,9 @@ namespace AkkaDiagram.Actors
 {
     public class DebugMessageHandler : ReceiveActor
     {
-        private const string UNHANDLED_TEMPLATE = "[UNHANDLED] new Debug(\"{LogSource}\", Type.GetType(\"{LogClass}\"), \"{Message}\")";
+        private const string _UNHANDLED_TEMPLATE = "[UNHANDLED] new Debug(\"{LogSource}\", Type.GetType(\"{LogClass}\"), \"{Message}\")";
 
-        public DebugMessageHandler()
-        {
-            Receive<Debug>(debugMsg => Handle(debugMsg));
-        }
+        public DebugMessageHandler() => Receive<Debug>(debugMsg => Handle(debugMsg));
 
         private void Handle(Debug debugMsg)
         {
@@ -30,7 +27,7 @@ namespace AkkaDiagram.Actors
             // Console.WriteLine("[2][DebugHandler] " + debugMsg);
             if (!(handle != null && handle.Handle()))
             {
-                var outString = UNHANDLED_TEMPLATE.Replace("{LogSource}", debugMsg.LogSource);
+                var outString = _UNHANDLED_TEMPLATE.Replace("{LogSource}", debugMsg.LogSource);
                 outString = outString.Replace("{LogClass}", debugMsg.LogClass.AssemblyQualifiedName);
                 outString = outString.Replace("{Message}", debugMsg.Message.ToString());
 
