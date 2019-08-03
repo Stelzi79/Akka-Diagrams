@@ -4,6 +4,8 @@ using System.IO;
 using Akka.Actor;
 using Akka.Configuration;
 
+using AkkaDiagram;
+
 using SomeActorSystem.Actors;
 
 namespace SomeActorSystem

@@ -5,8 +5,15 @@ using AkkaDiagram.Actors.Messages;
 
 namespace AkkaDiagram
 {
+    /// <summary>
+    /// Provides some Defaults
+    /// </summary>
     public static class Defaults
     {
+        /// <summary>
+        /// Returns all the built in types AkkaDiagram uses
+        /// </summary>
+        /// <returns>BuiltIn Types</returns>
         public static IDictionary<string, Type> BuiltInTypes()
         {
             var ret = new Dictionary<string, Type>

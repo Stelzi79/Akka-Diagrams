@@ -8,6 +8,7 @@ namespace AkkaDiagram.Test
 {
     public class TestMessages : IEnumerable<object[]>
     {
+        /// <inheritdoc/>
         public IEnumerator<object[]> GetEnumerator()
         {
             yield return new object[]
@@ -108,6 +109,7 @@ namespace AkkaDiagram.Test
             //    new TimeSpan(0, 0, 0, 0, 200)};
         }
 
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

@@ -12,6 +12,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>..\AkkaDiagram.ruleset</CodeAnalysisRuleSet>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
     </PropertyGroup>
 
 

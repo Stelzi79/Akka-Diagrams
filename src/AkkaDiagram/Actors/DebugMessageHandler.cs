@@ -10,14 +10,20 @@ using AkkaDiagram.Actors.Handlers;
 using AkkaDiagram.Actors.Messages;
 
 using static AkkaDiagram.DiagramLoggerActor;
-using static AkkaDiagram.SettingsLitterals;
+using static AkkaDiagram.SettingsLiterals;
 
 namespace AkkaDiagram.Actors
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class DebugMessageHandler : ReceiveActor
     {
         private const string _UNHANDLED_TEMPLATE = "[UNHANDLED] new Debug(\"{LogSource}\", Type.GetType(\"{LogClass}\"), \"{Message}\")";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DebugMessageHandler"/> class.
+        /// </summary>
         public DebugMessageHandler() => Receive<Debug>(debugMsg => Handle(debugMsg));
 
         private void Handle(Debug debugMsg)
@@ -62,6 +68,7 @@ namespace AkkaDiagram.Actors
         private readonly IList<OutputHandlerInfo> _OutputHandlers = new List<OutputHandlerInfo>();
         private List<string> _MessageHandlers = new List<string>();
 
+        /// <inheritdoc/>
         protected override void PreStart()
         {
             _MessageHandlers = _Config.GetStringList($"akka.diagram.{MESSAGE_HANDLERS}").ToList();

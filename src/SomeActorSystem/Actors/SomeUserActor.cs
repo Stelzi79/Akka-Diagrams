@@ -13,6 +13,7 @@ namespace SomeActorSystem.Actors
             _ = Context.ActorOf<NestedSubActor>(nameof(NestedSubActor));
         }
 
+        /// <inheritdoc/>
         protected override void OnReceive(object message) => System.Console.WriteLine($"Got some message: '{message}'!");
     }
 }
