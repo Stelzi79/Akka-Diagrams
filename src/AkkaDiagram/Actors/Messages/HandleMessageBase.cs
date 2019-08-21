@@ -16,7 +16,7 @@ namespace AkkaDiagram.Actors.Messages
     public abstract class HandleMessageBase<T>
         where T : IHandleMessage
     {
-        private static IList<OutputHandlerInfo> _OutputHandlers;
+        private static IList<OutputHandlerInfo> _OutputHandlers = new List<OutputHandlerInfo>();
 
         /// <summary>
         /// Gets the Debug Message
@@ -27,7 +27,10 @@ namespace AkkaDiagram.Actors.Messages
         /// Initializes a new instance of the <see cref="HandleMessageBase{T}"/> class.
         /// </summary>
         /// <param name="origin"></param>
-        protected HandleMessageBase(Debug origin) => Origin = origin;
+        protected HandleMessageBase(Debug origin)
+        {
+            Origin = origin;
+        }
 
         /// <summary>
         ///
@@ -36,9 +39,9 @@ namespace AkkaDiagram.Actors.Messages
         /// <returns>Returns if it could be handled</returns>
         protected bool Handle(T handledMessage)
         {
-            var test = _OutputHandlers.Where(msg => msg.ShouldHandle(handledMessage.Tag));
+            var outputhandlers = _OutputHandlers.Where(msg => msg.ShouldHandle(handledMessage.Tag));
 
-            foreach (var handler in test)
+            foreach (var handler in outputhandlers)
             {
                 handler.Handle(handledMessage);
             }
