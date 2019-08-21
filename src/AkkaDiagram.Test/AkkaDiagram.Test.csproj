@@ -5,7 +5,7 @@
         <RootNamespace>AkkaDiagram.Test</RootNamespace>
 
         <IsPackable>false</IsPackable>
-        <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+        <DocumentationFile>$(OutDir)$(Target)/$(AssemblyName).xml</DocumentationFile>
         <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -14,7 +14,6 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>..\AkkaDiagram.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
-
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0-preview-20190808-03" />
