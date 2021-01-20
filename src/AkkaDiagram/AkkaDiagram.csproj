@@ -39,7 +39,7 @@
         </None>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Akka" Version="1.4.0-beta3" />
+        <PackageReference Include="Akka" Version="1.4.15" />
         <PackageReference Include="MinVer" Version="2.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
