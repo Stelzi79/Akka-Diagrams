@@ -20,10 +20,7 @@ namespace AkkaDiagram.Actors.Messages
         public string ActorType { get; }
 
         private Removed(Debug origin, string actorType)
-            : base(origin)
-        {
-            ActorType = actorType;
-        }
+            : base(origin) => ActorType = actorType;
 
         /// <inheritdoc/>
         public string Tag => nameof(Removed);
