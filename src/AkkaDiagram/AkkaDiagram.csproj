@@ -21,16 +21,16 @@
         <StyleCopTreatErrorsAsWarnings>True</StyleCopTreatErrorsAsWarnings>
         <ApplicationIcon />
         <StartupObject />
-        <DocumentationFile>$(OutDir)$(Target)/$(AssemblyName).xml</DocumentationFile>
+        <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
         <!--<NoWarn>$(NoWarn),1573,1591,1712</NoWarn>-->
     </PropertyGroup>
-
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>..\AkkaDiagram.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>..\AkkaDiagram.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
+
     <ItemGroup>
         <None Include="..\..\LICENSE">
             <Pack>True</Pack>
@@ -41,6 +41,8 @@
     <ItemGroup>
         <PackageReference Include="Akka" Version="1.4.19" />
         <PackageReference Include="MinVer" Version="2.0.0">
+        <PackageReference Include="Akka" Version="1.4.46" />
+        <PackageReference Include="MinVer" Version="1.2.0-beta.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
