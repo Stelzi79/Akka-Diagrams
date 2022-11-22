@@ -23,10 +23,7 @@ namespace AkkaDiagram.Actors.Messages
         public string Tag => nameof(UnsubscribeFromAll);
 
         private UnsubscribeFromAll(Debug origin, string actorPath)
-            : base(origin)
-        {
-            ActorPath = actorPath;
-        }
+            : base(origin) => ActorPath = actorPath;
 
         /// <inheritdoc/>
         public bool Handle() =>
