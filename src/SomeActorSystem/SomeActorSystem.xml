@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SomeActorSystem</name>
+    </assembly>
+    <members>
+        <member name="M:SomeActorSystem.Program.Main(System.String[])">
+            <summary>
+            Creates a Actor system like:
+            akka://SomeActorCluster
+                akka://SomeActorCluster/user/SomeUserActor
+                    akka://SomeActorCluster/user/SomeUserActor/SubActor1
+                    akka://SomeActorCluster/user/SomeUserActor/SubActor2
+                    akka://SomeActorCluster/user/SomeUserActor/SubActor3
+                    akka://SomeActorCluster/user/SomeUserActor/NestedSubActor
+                        akka://SomeActorCluster/user/SomeUserActor/NestedSubActor/SubActorNested1
+                        akka://SomeActorCluster/user/SomeUserActor/NestedSubActor/SubActorNested2
+                        akka://SomeActorCluster/user/SomeUserActor/NestedSubActor/SubActorNested3
+            </summary>
+            <param name="args">Currently not used</param>
+        </member>
+    </members>
+</doc>
